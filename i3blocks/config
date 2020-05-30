@@ -1,0 +1,327 @@
+#
+#  ██  ████  ██       ██                  ██
+# ░░  █░░░ █░██      ░██                 ░██
+#  ██░    ░█░██      ░██  ██████   █████ ░██  ██  ██████
+# ░██   ███ ░██████  ░██ ██░░░░██ ██░░░██░██ ██  ██░░░░
+# ░██  ░░░ █░██░░░██ ░██░██   ░██░██  ░░ ░████  ░░█████
+# ░██ █   ░█░██  ░██ ░██░██   ░██░██   ██░██░██  ░░░░░██
+# ░██░ ████ ░██████  ███░░██████ ░░█████ ░██░░██ ██████
+# ░░  ░░░░  ░░░░░   ░░░  ░░░░░░   ░░░░░  ░░  ░░ ░░░░░░
+#
+
+# align
+# border
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/libexec/i3blocks/$BLOCK_NAME
+
+full_text=
+align=center
+separator=false
+separator_block_width=0
+color=#BD93F9
+markup=pango
+
+border_left=0
+border_right=0
+border_top=15
+border_bottom=15
+border=#BD93F9 #282a36
+
+[focused window]
+command=xtitle -s -t 50
+interval=persist
+color=#F8F8F2
+border=#282a36
+border_right=0
+
+[separator2]
+full_text=<span font="10.5" background="#282a36" foreground="#f4f99d"> </span>
+markup=pango
+background=#222d32
+border=#222d32
+
+[disk-home]
+label= 
+command=/usr/lib/i3blocks/disk $home
+instance=/home/heikai
+interval=30
+color=#282a36
+border=#f4f99d
+background=#f4f99d
+border_right=0
+
+[separator2]
+full_text=<span font="10.5" background="#f4f99d" foreground="#282a36"> </span>
+markup=pango
+border=#f4f99d
+background=#f4f99d
+align=center
+
+[cpu_usage]
+label= 
+command=$SCRIPT_DIR/cpu_usage -d 0
+interval=10
+color=#f8f8f2
+markup=pango
+border=#282a36
+background=#282a36
+border_right=0
+full_text=
+
+[separator1]
+full_text=<span font="10.5" background="#282a36" foreground="#ff92d0"> </span>
+markup=pango
+border=#282a36
+background=#282a36
+
+[temp]
+label= 
+#command=$SCRIPT_DIR/temperature
+command=echo `sensors -A | grep -oP '^Core.+?  \+\K\d+' | awk '{k+=$1}END{print k/NR}' | sed 's/\.[^\.]*$//'`°C
+interval=10
+color=#282a36
+markup=pango
+border=#ff92d0
+background=#ff92d0
+border_right=0
+
+[separator2]
+full_text=<span font="10.5" background="#ff92d0" foreground="#282a36"> </span>
+markup=pango
+border=#ff92d0
+background=#ff92d0
+
+[wifi]
+label= 
+command=$SCRIPT_DIR/wifi
+instance=wlan0
+interval=10
+color=#f8f8f2
+markup=pango
+border=#282a36
+background=#282a36
+border_right=0
+full_text=
+
+[separator1]
+full_text=<span font="10.5" background="#282a36" foreground="#8be9fd"> </span>
+markup=pango
+border=#282a36
+background=#282a36
+
+[volume]
+label= 
+command=/usr/lib/i3blocks/volume
+instance=Master
+interval=3
+signal=10
+border_right=0
+color=#282a36
+border=#8be9fd
+background=#8be9fd
+
+
+[separator2]
+full_text=<span font="10.5" background="#8be9fd" foreground="#282a36"> </span>
+border=#282a36
+background=#282a36
+markup=pango
+
+[battery]
+command=$SCRIPT_DIR/battery
+markup=pango
+interval=30
+color=#f8f8f2
+border=#282a36
+background=#282a36
+border_right=0
+
+[separator2]
+full_text=<span font="10.5" background="#282a36" foreground="#caa9fa"> </span>
+border=#282a36
+background=#282a36
+markup=pango
+
+[time]
+label= 
+command=date '+%Y-%m-%d %I:%M %p '
+interval=5
+color=#282a36
+border=#caa9fa
+background=#caa9fa
+border_right=0
+markup=pango
+
+
+#::::::::::::::: Deactivated ::::::::::::::::#
+
+#[uptime_label]
+#label= 
+#command=/usr/lib/i3blocks/uptime
+#interval=60
+#border=#543154
+
+#[separator]
+#full_text=〈
+#color=#000000
+
+#[memory]
+#label= ⚅
+#command=/usr/lib/i3blocks/memory
+#instance=mem
+#interval=30
+#border=#556072
+
+#[separator]
+#full_text=〈
+#color=#000000
+
+#[time]
+#label= 
+#command=date '+%a:%d/%m/%y'
+#interval=5
+#border=#70774e
+
+#[music]
+#label=  :
+#command=mpc current
+#color=#000000
+#interval=20
+
+#[dunst]
+#command=/usr/lib/i3blocks/notify
+#signal=12
+
+#[host]
+#label= :
+#command=uname -r
+#color=#84c800
+#interval=once
+
+#[wireless]
+#label= :
+#command=[[ -z "(iwgetid -r)" ]] || echo "$(iwgetid -r)"
+#interval=2
+
+#[separator1]
+#full_text=<span foreground="#3c4a59"></span>
+#border=#1a253a
+#markup=pango
+
+#[upload]
+#label= 
+#command=~/.config/i3/scripts/bandwidth.sh tx
+#min_width=0000 kB/s
+#align=left
+#interval=1 # IMPORTANT
+#border=#3c4a59
+#markup=pango
+
+#[separator2]
+#full_text=<span foreground="#1a253a"></span>
+#border=#3c4a59
+#markup=pango
+
+#[download]
+#label= 
+#command=~/.config/i3/scripts/bandwidth.sh rx
+#min_width=0000 kB/s
+#align=left
+#interval=1 # IMPORTANT
+#border=#1a253a
+#markup=pango
+
+#[weather]
+#instance=3647651
+#command=/usr/lib/i3blocks/weather
+#interval=60
+#color=#f8f8f2
+#markup=pango
+#border=#BD93F9
+#border_right=0
+
+#[separator1]
+#full_text=<span foreground="#f8f8f2"></span>
+#markup=pango
+#border=#BD93F9
+
+#[mediaplayer]
+#label=  :
+#command=/usr/lib/i3blocks/mediaplayer
+#instance=mpd
+#interval=5
+#signal=10
+#color=#f8f8f2
+#border=#005F87
+#border_right=0
+#markup=pango
+
+#[separator1]
+#full_text=<span foreground="#005F87"></span>
+#border=#005F87
+#markup=pango
+
+#[mpd]
+#command=/usr/lib/i3blocks/i3blocks-mpd
+#interval=5
+#signal=10
+#color=#f8f8f2
+#border=#005F87
+#border_right=0
+#markup=pango
+
+#[separator1]
+#full_text=<span foreground="#005F87"></span>
+#border=#005F87
+#markup=pango
+
+#[gitcontribs]
+#command=$SCRIPT_DIR/gitcontribs
+#color=#50fa7b
+#interval=3600
+#border=#282a36
+#background=#282a36
+#border_right=-3
+#markup=pango
+
+#[update label]
+#full_text= 
+#color=#f8f8f2
+#separator=false
+#border=#F44336
+#background=#F44336
+#border_right=0
+#markup=pango
+
+#[update]
+#command=pacaur -Qu | wc -l
+#color=#f8f8f2
+##signal=12
+#interval=120
+#border=#F44336
+#background=#F44336
+#border_right=0
+#markup=pango
+
+#[separator1]
+#full_text=<span font="10.5" background="#F44336" foreground="#282a36"> </span>
+#border=#F44336
+#background=#F44336
+#markup=pango
