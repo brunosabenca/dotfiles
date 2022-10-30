@@ -1,0 +1,8 @@
+#!/bin/sh
+DISPLAY=":0.0"
+HOME=/home/heikai
+XAUTHORITY=$HOME/.Xauthority
+export DISPLAY XAUTHORITY HOME
+
+setxkbmap -layout us -variant altgr-intl -option nodeadkeys
+xmodmap ~/.xmodmap
