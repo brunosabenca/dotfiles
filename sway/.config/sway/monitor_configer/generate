@@ -1,0 +1,33 @@
+#!/bin/python3
+
+# This script outputs the current display layout to a script which for example,
+# enables the user to quickly switch between layouts using scripts
+# You can for example use the "wdisplays" program to configure your layout and then use this script to save the layout to a script
+
+from argparse import ArgumentParser
+import subprocess
+import json
+import generate_lib
+
+parser = ArgumentParser()
+parser.add_argument("-l", "--list", action="store_true", help="List monitors to pick as primary monitor")
+parser.add_argument("-g", "--generate", metavar="monitor number", dest="generate", type=int, help="Pick primary monitor and the layout will be generated")
+
+
+def run(args):
+    # print("Running: " + args)
+    return subprocess.run(args, shell=True, capture_output=True).stdout.decode("ascii")
+
+
+(sway_outputs, disabled_outputs) = generate_lib.parse_sway_output(json.loads(run("swaymsg --raw -t get_outputs")))
+
+args = parser.parse_args()
+if args.list:
+    generate_lib.list_monitors(sway_outputs)
+    exit(0)
+if args.generate is not None:
+    print(generate_lib.generate(sway_outputs, disabled_outputs, args.generate))
+    exit(0)
+
+# no option was chosen, print helpful info
+parser.print_help()

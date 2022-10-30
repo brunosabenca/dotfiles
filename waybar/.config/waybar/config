@@ -1,124 +1,219 @@
+[
 {
-    "layer": "top",
-    "position": "top",
-    "height": 30,
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["tray", "custom/spotify", "custom/weather", "custom/storage", "backlight", "pulseaudio", "idle_inhibitor", "battery", "clock"],
-    "sway/mode": {
-        "format": " {}"
-    },
-    "sway/workspaces": {
-        "format": "{name}",
-        "disable-scroll": true
-    },
-    "sway/window": {
-        "max-length": 80,
-        "tooltip": false
-    },
-    "clock": {
-        "format": "{:%a %d %b %H:%M}",
-        "tooltip": false
-    },
-    "battery": {
-        "format": "{capacity}% {icon}",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""],
-        "format-charging": "{capacity}% ",
-        "interval": 30,
-        "states": {
-            "warning": 25,
-            "critical": 10
-        },
-        "tooltip": false
-    },
-    "network": {
-        "format": "{icon}",
-        "format-alt": "{ipaddr}/{cidr} {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": {
-            "wifi": ["", "" ,""],
-            "ethernet": [""],
-            "disconnected": [""]
-        },
-        "on-click": "termite -e nmtui",
-    "tooltip": false
-    },
-    "pulseaudio": {
-        "format": "{icon}",
-        "format-alt": "{volume} {icon}",
-        "format-alt-click": "click-right",
-        "format-muted": "",
-        "format-icons": {
-            "phone": [" ", " ", " "],
-            "default": ["", "", ""]
-        },
-        "scroll-step": 10,
-        "on-click": "pavucontrol",
-        "tooltip": false
-    },
-    "custom/spotify": {
-        "interval": 1,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/spotify.sh",
-        "exec-if": "pgrep spotify",
-        "escape": true
-    },
-    "custom/storage": {
-        "format": "{} ",
-        "format-alt": "{percentage}% ",
-        "format-alt-click": "click-right",
-        "return-type": "json",
-        "interval": 60,
-        "exec": "~/.config/waybar/modules/storage.sh"
-    },
-    "backlight": {
-        "format": "{icon}",
-        "format-alt": "{percent}% {icon}",
-        "format-alt-click": "click-right",
-        "format-icons": ["", ""],
-        "on-scroll-down": "sudo bright_down",
-        "on-scroll-up": "sudo bright_up"
-    },
-    "custom/weather": {
-        "format": "{}",
-        "format-alt": "{alt}: {}",
-        "format-alt-click": "click-right",
-        "interval": 1800,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/weather.sh",
-        "exec-if": "ping wttr.in -c1"
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        },
-        "tooltip": false
-    },
-    "custom/mail": {
-        "format": "",
-        "format-alt": "{alt} ",
-        "format-alt-click": "click-right",
-        "interval": 60,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/mail.py",
-        "tooltip": false
-    },
-    "custom/test": {
-        "format": "{}",
-        "exec": "/tmp/test blub",
-        "param": "blah",
-        "interval": 5
-    },
-    "tray": {
-        "icon-size": 18
-    },
-    "custom/corona": {
-        "interval": 1440,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/corona.sh",
-        "escape": false
+  "output": [
+    "DP-1"
+  ],
+  "position": "bottom",
+  "height": 30,
+  "margin-top": 1,
+  "modules-right": [
+    "custom/openweather",
+    "idle_inhibitor",
+    "network",
+    "pulseaudio",
+    "custom/media",
+    "clock",
+    "tray"
+  ],
+  "modules-center": [
+    "sway/workspaces",
+    "sway/mode"
+  ],
+  "modules-left": [
+    "cpu",
+    "temperature",
+    "memory",
+    "disk",
+    "backlight",
+    "battery",
+    "sway/window"
+  ],
+  "custom/openweather": {
+    "exec": "~/bin/scripts/weather.py",
+    "on-click": "~/bin/scripts/weather.py open",
+    "interval": 1800
+  },
+  "sway/workspaces": {
+    "persistent_workspaces": {
+      "1": [
+        "DP-1"
+      ],
+      "2": [
+        "DP-1"
+      ],
+      "3": [
+        "DP-1"
+      ],
+      "4": [
+        "DP-1"
+      ],
+      "5": [
+        "DP-1"
+      ],
+      "6": [
+        "DP-1"
+      ]
     }
+  },
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+  "clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "{:%Y-%m-%d %a %H:%M}"
+  },
+  "cpu": {
+    "format": "{usage}% CPU",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "{}% MEM"
+  },
+  "disk": {
+    "interval": 30,
+    "format": "🖴 {percentage_free}%/{free} free",
+    "path": "/"
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "backlight": {
+    "format": "{percent}% BL"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-full-plugged": "100% ",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "battery#bat2": {
+    "bat": "BAT2"
+  },
+  "network": {
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol"
+  },
+  "custom/media": {
+    "format": "{icon} {}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "default": "🎜"
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null"
+  }
 }
+,
+{
+  "output": [
+    "HDMI-A-1"
+  ],
+  "position": "bottom",
+  "height": 30,
+  "margin-top": 1,
+  "modules-center": [
+    "cpu",
+    "temperature",
+    "memory",
+    "sway/window",
+    "sway/workspaces",
+    "sway/mode",
+    "clock"
+  ],
+  "sway/workspaces": {
+    "persistent_workspaces": {
+      "7": [
+        "HDMI-A-1"
+      ],
+      "8": [
+        "HDMI-A-1"
+      ],
+      "9": [
+        "HDMI-A-1"
+      ],
+      "10": [
+        "HDMI-A-1"
+      ]
+    }
+  },
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "{:%Y-%m-%d %a %H:%M}"
+  },
+  "cpu": {
+    "format": "{usage}% CPU",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "{}% MEM"
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  }
+}
+]

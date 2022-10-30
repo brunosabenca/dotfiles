@@ -50,7 +50,6 @@ exec_always benq-on-top
 exec mako
 
 # Other applications
-exec insync start
 exec nm-applet --indicator
 
 #########################################################################
@@ -58,14 +57,25 @@ exec nm-applet --indicator
 ##########################################################################
 
 # Kensington Orbit
-input "1149:4130:Kensington_USB_Orbit" {
-    accel_profile       adaptive
-    middle_emulation    enabled
+#input "1149:4130:Kensington_USB_Orbit" {
+#    accel_profile       adaptive
+#    middle_emulation    enabled
+#    natural_scroll      enabled
+#    left_handed         false
+#    scroll_button       button3
+#    scroll_factor       0.5
+#    pointer_accel       1
+#}
+
+# DEFT Pro
+input "1390:305:ELECOM_TrackBall_Mouse_DEFT_Pro_TrackBall_Mouse" {
     natural_scroll      enabled
-    left_handed         false
-    scroll_button       button3
+    scroll_button       BTN_BACK
     scroll_factor       0.5
-    pointer_accel       1
+    accel_profile       adaptive
+    middle_emulation    false
+    left_handed         false
+    pointer_accel       0.5
 }
 
 # SteelSeries Rival
@@ -89,7 +99,7 @@ input "1739:0:Synaptics_TM3053-003" {
 }
 
 # Keyboard: Anne Pro 2
-input "1241:32777:OBINLB_USB-HID_Keyboard" {
+input "1241:41619:OBINS_OBINS\nAnnePro2" {
     xkb_layout   us
     xkb_variant  altgr-intl
     xkb_options  nodeadkeys,caps:none
@@ -167,9 +177,9 @@ bindsym --release {
 
 # Record screencasts
 bindsym { 
-    $mod+Control+i        exec echo 1 | rec toggle
-    $mod+Control+Shift+i  exec echo 1 | rec toggle-region
-    $mod+i                exec rec status-notify
+    $mod+Control+y        exec echo 1 | rec toggle
+    $mod+Control+Shift+y  exec echo 1 | rec toggle-region
+    $mod+y                exec rec status-notify
 }
 
 # Make a windows sticky, floating and borderless
@@ -179,8 +189,7 @@ bindsym {
         sticky     enable; \
         border     none; \
         fullscreen disable; \
-        resize     set      608  342; \
-        move       position 1312 719
+        exec ~/.config/sway/sway_window_move.sh bottom-right
 
     $mod+shift+backslash \
         floating   disable; \
@@ -188,7 +197,6 @@ bindsym {
         border     pixel 2; \
         fullscreen disable
 }
-
 
 # Start a terminal
 bindsym $mod+Return exec alacritty
@@ -237,14 +245,14 @@ for_window [title="^launcher$"] floating enable
 
 #set $launcher dmenu_path | fzf | xargs swaymsg exec
 #set $launcher /home/heikai/bin/sway-launcher
-#set $dlauncher /home/heikai/bin/j4-launcher
+set $dlauncher /home/heikai/bin/j4-launcher
 
-#bindsym $mod+d exec rofi -show run
-exec export QT_QPA_PLATFORMTHEME="" && albert
-bindsym $mod+d exec albert toggle
+bindsym $mod+d exec rofi -show run
+#exec export QT_QPA_PLATFORMTHEME="" && albert
+#bindsym $mod+d exec albert toggle
 #bindsym $mod+d exec alacritty --dimensions 64 16 --title 'launcher' -e sh -c \'$launcher\'
 #bindsym $mod+Shift+d exec rofi -show drun
-#bindsym $mod+Shift+d exec alacritty --dimensions 64 16 --title 'launcher' -e sh -c \'$dlauncher\'
+#bindsym $mod+d exec alacritty --dimensions 64 16 --title 'launcher' -e sh -c \'$dlauncher\'
 
 
 #bindsym $mod+d exec zsh -c 'rofi -show combi -combi-modi "run#drun" -modi combi'
@@ -257,12 +265,12 @@ bindsym $mod+d exec albert toggle
 ##########################################################################
 
 # Disable and enable gaps
-bindsym {
-    $mod+o          gaps inner current set 0;  gaps outer current set 0
-    $mod+p          gaps inner current set 10; gaps outer current set 10
-    $mod+Shift+p    gaps inner current set 10; gaps outer current set 40
-    $mod+Shift+o    gaps inner current set 10; gaps outer current set 200
-}
+#bindsym {
+#    $mod+o          gaps inner current set 0;  gaps outer current set 0
+#    $mod+p          gaps inner current set 10; gaps outer current set 10
+#    $mod+Shift+p    gaps inner current set 10; gaps outer current set 40
+#    $mod+Shift+o    gaps inner current set 10; gaps outer current set 200
+#}
 
 # Set inner/outer gaps
 gaps inner 0
@@ -326,10 +334,10 @@ mode "$mode_gaps_outer" {
 ##########################################################################
 
 # Start Applications
-bindsym $mod+shift+w exec google-chrome-stable
-bindsym $mod+shift+f exec fsearch
+bindsym $mod+shift+w exec firefox-developer-edition
+#bindsym $mod+shift+f exec fsearch
 bindsym $mod+r exec alacritty -e ranger
-bindsym $mod+shift+e exec gnvim
+#bindsym $mod+shift+e exec gnvim
 
 #bindsym $mod+grave exec "urxvt -geometry 35x9 -e tty-clock -b -c -C 3 -D"
 bindsym $mod+grave exec dmenuunicode
@@ -386,21 +394,26 @@ for_window [app_id="^.*"] border pixel $borders
 #                                   focus                                #
 ##########################################################################
 
+set $left m
+set $down n
+set $up e
+set $right i
+
 # Change focus
 focus_follows_mouse     yes
 popup_during_fullscreen smart
 
 # Change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
 # Move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 # Alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -409,15 +422,16 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # Move the whole workspace to the next/previous output
-bindsym $mod+Ctrl+Shift+h move workspace to output left
-bindsym $mod+Ctrl+Shift+j move workspace to output down
-bindsym $mod+Ctrl+Shift+k move workspace to output up
-bindsym $mod+Ctrl+Shift+l move workspace to output right
+bindsym $mod+Ctrl+Shift+$left move workspace to output left
+bindsym $mod+Ctrl+Shift+$down move workspace to output down
+bindsym $mod+Ctrl+Shift+$up move workspace to output up
+bindsym $mod+Ctrl+Shift+$right move workspace to output right
 
 # Workspace back and forth (with/without active container)
 workspace_auto_back_and_forth no
 bindsym $mod+Shift+Tab move container to workspace back_and_forth; workspace back_and_forth
 bindsym $mod+Tab workspace back_and_forth
+bindsym mod1+Tab workspace back_and_forth
 
 # Split in horizontal orientation
 bindsym $mod+g split h;exec notify-send 'split horizontally'
@@ -428,10 +442,13 @@ bindsym $mod+v split v;exec notify-send 'split vertically'
 # Toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
+# fullscreen like behavior with the statusbar also showing
+bindsym $mod+shift+f exec ~/.config/sway/maximize.sh
+
 # Change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+p layout toggle split
 
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -464,7 +481,8 @@ bindsym {
     $mod+7 workspace number 7
     $mod+8 workspace number 8
     $mod+9 workspace number 9
-    $mod+0 workspace number 0
+    $mod+0 workspace number 10
+    $mod+minus workspace number 11
 }
 
 # Navigate to previous/next workspace
@@ -490,6 +508,7 @@ bindsym {
     $mod+Ctrl+7 move container to workspace number 7
     $mod+Ctrl+8 move container to workspace number 8
     $mod+Ctrl+9 move container to workspace number 9
+    $mod+Ctrl+0 move container to workspace number 10
 }
 
 # Move to workspace with focused container
@@ -503,10 +522,11 @@ bindsym {
     $mod+Shift+7 move container to workspace number 7; workspace number 7
     $mod+Shift+8 move container to workspace number 8; workspace number 8
     $mod+Shift+9 move container to workspace number 9; workspace number 9
+    $mod+Shift+0 move container to workspace number 10; workspace number 10
 }
 
 # Rename workspace with i3-input using numbers and text
-bindsym $mod+Shift+n exec /home/heikai/bin/sway-rename-workspace
+#bindsym $mod+k exec /home/heikai/bin/sway-rename-workspace
 
 # Switch to workspace with urgent window
 bindsym $mod+u [urgent=latest] focus
@@ -606,7 +626,7 @@ exec_always ~/.config/waybar/waybar.sh
 #                            shut down / restart                         #
 ##########################################################################
 
-bindsym $mod+Escape      reload
+bindsym $mod+ctrl+r      reload
 bindsym $mod+ctrl+Escape exit
 
 # Set shut down, restart and locking features

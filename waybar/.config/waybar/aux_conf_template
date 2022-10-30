@@ -1,0 +1,33 @@
+{
+	"output": [],
+	"position": "bottom",
+	"height": 30,
+	"margin-top": 1,
+	"modules-center": [ "cpu", "temperature", "memory", "sway/window", "sway/workspaces", "sway/mode", "clock" ],
+	"sway/workspaces": {
+		"persistent_workspaces": {}
+	},
+	"sway/mode": {
+		"format": "<span style=\"italic\">{}</span>"
+	},
+	"clock": {
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+		"format": "{:%Y-%m-%d %a %H:%M}"
+	},
+	"cpu": {
+		"format": "{usage}% CPU",
+		"tooltip": false
+	},
+	"memory": {
+		"format": "{}% MEM"
+	},
+	"temperature": {
+		"critical-threshold": 80,
+		"format": "{temperatureC}°C {icon}",
+		"format-icons": [
+			"",
+		"",
+		""
+		]
+	}
+}

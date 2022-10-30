@@ -1,0 +1,45 @@
+#!/bin/bash -x
+
+swaybin="/bin/sway"
+[[ -n "$SWAY_BIN" ]] && swaybin="$SWAY_BIN"
+
+[[ -n "$@" ]] && exec "$swaybin" "$@"
+
+#truncate before launch of sway
+#>~/sway.log
+
+# Open STDOUT as $LOG_FILE file for write.
+# Redirect STDERR to STDOUT
+# Filter out garbage from xwayland
+exec &>> >(sed '/Errors from xkbcomp are not fatal to the X server/d; /The XKEYBOARD keymap compiler (xkbcomp) reports:/d; /Unsupported maximum keycode/d; /X11 cannot support keycodes above 255/d; /Could not resolve keysym/d' | tee -a ~/sway.log)
+# exec 1> ~/sway.log
+# exec 2> ~/sway.error
+
+#nice way to separate launches
+printf "Launching sway at: "
+date --rfc-3339=s
+
+# Run FF in wayland
+export MOZ_ENABLE_WAYLAND=1
+# Hardwar acceleration
+export MOZ_WAYLAND_USE_VAAPI=1
+# Touch support, I think
+export MOZ_USE_XINPUT2=1
+# TODO why?
+# export MOZ_DISABLE_RDD_SANDBOX=1
+# Fixes opening of links in XWayland apps?
+# TODO verify
+export MOZ_DBUS_REMOTE=1
+
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=sway
+
+if [ "$HOST" == "fourforty" ]; then
+	export VDPAU_DRIVER=va_gl
+	export LIBVA_DRIVER_NAME=i965
+fi
+
+export QT_QPA_PLATFORM=wayland
+
+exec "$swaybin"
+

@@ -94,7 +94,7 @@ background=#282a36
 [temp]
 label= 
 #command=$SCRIPT_DIR/temperature
-command=echo `sensors -A | grep -oP '^Core.+?  \+\K\d+' | awk '{k+=$1}END{print k/NR}' | sed 's/\.[^\.]*$//'`°C
+command=echo `sensors -A | grep -oP '^Tdie.+?  \+\K\d+' | awk '{k+=$1}END{print k/NR}' | sed 's/\.[^\.]*$//'`°C
 interval=10
 color=#282a36
 markup=pango
@@ -138,25 +138,25 @@ border=#8be9fd
 background=#8be9fd
 
 
-[separator2]
-full_text=<span font="10.5" background="#8be9fd" foreground="#282a36"> </span>
-border=#282a36
-background=#282a36
-markup=pango
+#[separator2]
+#full_text=<span font="10.5" background="#8be9fd" foreground="#282a36"> </span>
+#border=#282a36
+#background=#282a36
+#markup=pango
 
-[battery]
-command=$SCRIPT_DIR/battery
-markup=pango
-interval=30
-color=#f8f8f2
-border=#282a36
-background=#282a36
-border_right=0
+#[battery]
+#command=$SCRIPT_DIR/battery
+#markup=pango
+#interval=30
+#color=#f8f8f2
+#border=#282a36
+#background=#282a36
+#border_right=0
 
 [separator2]
-full_text=<span font="10.5" background="#282a36" foreground="#caa9fa"> </span>
-border=#282a36
-background=#282a36
+full_text=<span font="10.5" background="#8be9fd" foreground="#caa9fa"> </span>
+border=#8be9fd
+background=#8be9fd
 markup=pango
 
 [time]
