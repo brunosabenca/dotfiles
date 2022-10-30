@@ -14,44 +14,6 @@ client.focused_inactive $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.unfocused        $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
 
-##########################################################################
-#                                  startup                               #
-##########################################################################
-
-# Load ssh keys
-exec "ssh-add ~/.ssh/id_fourforty 2>&1 > /dev/null < /dev/null"
-
-# Automatically lock and turn off screen when idle
-exec swayidle -w \
-    before-sleep 'swaylockblur'
-
-# Import Xdefaults
-exec xrdb -load ~/.Xdefaults
-
-# Set Gnome Theme
-set $gnome-schema org.gnome.desktop.interface
-exec_always {
-        gsettings set $gnome-schema gtk-theme 'Ant-Dracula'
-        gsettings set $gnome-schema icon-theme 'Flat-Remix-Yellow-Dark'
-        gsettings set $gnome-schema cursor-theme 'capitaine-cursors-light'
-        gsettings set $gnome-schema font-name 'Liberation Sans 11'
-        gsettings set $gnome-schema monospace-font-name 'Hack 11'
-}
-
-# Import Gnome settings
-exec_always import-gsettings \
-    gtk-theme:gtk-theme-name \
-    icon-theme:gtk-icon-theme-name \
-    cursor-theme:gtk-cursor-theme-name
-
-exec_always benq-on-top
-
-# Start notification server
-exec mako
-
-# Other applications
-exec nm-applet --indicator
-
 #########################################################################
 #                                  input                                 #
 ##########################################################################
@@ -466,6 +428,8 @@ bindsym $mod+x focus child
 # Toggle sticky
 bindsym $mod+Shift+y sticky toggle
 
+bindsym $mod+ctrl+s exec ~/.config/sway/wlsunset-toggle.sh
+
 ##########################################################################
 #                                workspaces                              #
 ##########################################################################
@@ -607,6 +571,25 @@ set {
 
 exec_always ~/.config/waybar/waybar.sh
 
+exec_always ~/.config/sway/exec_always.sh
+
+# Set Gnome Theme
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Ant-Dracula'
+    gsettings set $gnome-schema icon-theme 'Flat-Remix-Yellow-Dark'
+    gsettings set $gnome-schema cursor-theme 'capitaine-cursors-light'
+    gsettings set $gnome-schema font-name 'Liberation Sans 11'
+    gsettings set $gnome-schema monospace-font-name 'Hack 11'
+}
+
+# Import Gnome settings
+exec_always import-gsettings \
+    gtk-theme:gtk-theme-name \
+    icon-theme:gtk-icon-theme-name \
+    cursor-theme:gtk-cursor-theme-name
+
 #bar {
 #    height 18
 #    position bottom
@@ -644,3 +627,8 @@ mode "$mode_system" {
         Escape mode "default"
     }
 }
+
+exec ~/.config/sway/startup.sh
+
+include ~/.config/sway/host_specific_config
+
