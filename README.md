@@ -13,7 +13,7 @@
 ### First time setup
 
 ```bash
-git clone https://github.com/jhzn/dotfiles
+git clone https://github.com/brunosabenca/dotfiles
 chmod +x dotfiles/.config/dotfiles/bootstrap_dotfiles.sh
 #Open and modify file, because file is not usable by default for safety reasons
 vim ./dotfiles/.config/dotfiles/bootstrap_dotfiles.sh
