@@ -48,7 +48,7 @@ py_json() {
 }
 
 # restart services in docker-compose
-dc-restart(){
+dc_restart(){
 	[ -z $@ ] && echo "No containers args given" && return 1
 	docker-compose stop $@
 	docker-compose rm -f -v $@
