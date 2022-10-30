@@ -2,7 +2,8 @@
 
 source ~/.config/dotfiles/bash_strict_mode.sh
 
-configure-monitors
-
 ~/.config/sway/wallpaper.sh &
 
+~/bin/scripts/configure-monitors
+
+~/.config/waybar/waybar.sh
