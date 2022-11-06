@@ -259,3 +259,15 @@ zle -N expand_alias_space
 # Bind keys
 bindkey '^M' expand_alias_enter
 bindkey ' ' expand_alias_space
+
+secret() {
+	output="${HOME}/$(basename ${1}).$(date +%F).enc"
+	gpg --encrypt --armor \
+		--output ${output} \
+		-r 0xDBEAEF353D53D772 \
+		-r bruno@brunosabenca.com \
+		"${1}" && echo "${1} -> ${output}" }
+reveal() {
+	output=$(echo "${1}" | rev | cut -c16- | rev)
+	gpg --decrypt --output ${output} "${1}" \
+		&& echo "${1} -> ${output}" }
