@@ -5,9 +5,6 @@ src() {
   [ -f "$1" ] && source "$1"
 }
 
-# plugins/ssh-agent configuration
-zstyle :omz:plugins:ssh-agent identities id_fourforty id_ed25519 id_rsa id_openshift
-
 # Completion
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle :compinstall filename "${HOME}/.zshrc"
@@ -32,7 +29,6 @@ if [[ ! -s ${ZDOTDIR:-${HOME}}/.zgen/init.zsh ]]; then
   echo "Creating a zgen save..."
   # plugins
   #zgen oh-my-zsh plugins/thefuck
-  #zgen oh-my-zsh plugins/ssh-agent
   zgen load changyuheng/zsh-interactive-cd
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-history-substring-search
