@@ -240,25 +240,25 @@ source ~/.profile
 
 source ~/.bash_aliases
 
-# Expand alias on enter
-expand_alias_enter() {
-    zle _expand_alias
-    zle accept-line
-}
-
-# Expand alias on space
-expand_alias_space() {
-    zle _expand_alias
-    zle self-insert
-}
-
-# Create widgets
-zle -N expand_alias_enter
-zle -N expand_alias_space
-
-# Bind keys
-bindkey '^M' expand_alias_enter
-bindkey ' ' expand_alias_space
+## Expand alias on enter
+#expand_alias_enter() {
+#    zle _expand_alias
+#    zle accept-line
+#}
+#
+## Expand alias on space
+#expand_alias_space() {
+#    zle _expand_alias
+#    zle self-insert
+#}
+#
+## Create widgets
+#zle -N expand_alias_enter
+#zle -N expand_alias_space
+#
+## Bind keys
+#bindkey '^M' expand_alias_enter
+#bindkey ' ' expand_alias_space
 
 secret() {
 	output="${HOME}/$(basename ${1}).$(date +%F).enc"
