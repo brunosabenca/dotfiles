@@ -295,13 +295,18 @@ mode "$mode_gaps_outer" {
 #                                applications                            #
 ##########################################################################
 
-focus_on_window_activation focus
+
+# Open applications on specific workspaces
+#assign [class="Emacs"] number 3
+assign [class="TelegramDesktop"] number 8
+assign [app_id="sublime_merge"] number 5
+assign [app_id="gnvim"] number 4
+
 
 bindsym $mod+w exec '~/.config/sway/run-or-raise firefoxdeveloperedition firefox-developer-edition'
-
 bindsym $mod+t exec '~/.config/sway/run-or-raise Alacritty alacritty'
-
 bindsym $mod+g exec '~/.config/sway/run-or-raise sublime_merge smerge'
+bindsym $mod+v exec '~/.config/sway/run-or-raise gnvim gnvim'
 
 #bindsym $mod+shift+f exec fsearch
 bindsym $mod+r exec alacritty -e ranger
@@ -311,11 +316,6 @@ bindsym $mod+r exec alacritty -e ranger
 bindsym $mod+grave exec dmenuunicode
 bindsym mod1+shift+c exec galculator
 bindsym $mod+shift+x exec lxappearance
-
-# Open applications on specific workspaces
-#assign [class="Emacs"] number 3
-assign [class="TelegramDesktop"] number 8
-assign [app_id="sublime_merge"] number 5
 
 ##########################################################################
 #                                   rules                                #
@@ -371,6 +371,7 @@ set $right o
 # Change focus
 focus_follows_mouse     yes
 popup_during_fullscreen smart
+focus_on_window_activation focus
 
 # Change focus
 bindsym $mod+$left focus left
