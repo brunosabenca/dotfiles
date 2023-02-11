@@ -16,8 +16,8 @@ swaymsg "workspace 3 output $MON_0; workspace number 3; move workspace to $MON_0
 swaymsg "workspace 2 output $MON_0; workspace number 2; move workspace to $MON_0"
 swaymsg "workspace 1 output $MON_0; workspace number 1; move workspace to $MON_0"
 
-swaymsg output $MON_0 res 2560x1440@59.951hz scale 1.0 transform normal pos 0 1080 enable
-swaymsg output $MON_1 res 1920x1080@60.0hz scale 1.0 transform normal pos 320 0 enable
+swaymsg output $MON_0 res 2560x1440@59.951hz scale 1.0 transform normal pos 1920 0 enable
+swaymsg output $MON_1 res 1920x1080@60.0hz scale 1.0 transform normal pos 0 360 enable
 
 prim_waybar_persistent_workspaces=$(cat << EOF
 {

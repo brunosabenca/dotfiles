@@ -295,8 +295,14 @@ mode "$mode_gaps_outer" {
 #                                applications                            #
 ##########################################################################
 
-# Start Applications
-bindsym $mod+shift+w exec firefox-developer-edition
+focus_on_window_activation focus
+
+bindsym $mod+w exec '~/.config/sway/run-or-raise firefoxdeveloperedition firefox-developer-edition'
+
+bindsym $mod+t exec '~/.config/sway/run-or-raise Alacritty alacritty'
+
+bindsym $mod+g exec '~/.config/sway/run-or-raise sublime_merge smerge'
+
 #bindsym $mod+shift+f exec fsearch
 bindsym $mod+r exec alacritty -e ranger
 #bindsym $mod+shift+e exec gnvim
@@ -309,6 +315,7 @@ bindsym $mod+shift+x exec lxappearance
 # Open applications on specific workspaces
 #assign [class="Emacs"] number 3
 assign [class="TelegramDesktop"] number 8
+assign [app_id="sublime_merge"] number 5
 
 ##########################################################################
 #                                   rules                                #
@@ -356,10 +363,10 @@ for_window [app_id="^.*"] border pixel $borders
 #                                   focus                                #
 ##########################################################################
 
-set $left m
-set $down n
-set $up e
-set $right i
+set $left n
+set $down e
+set $up i
+set $right o
 
 # Change focus
 focus_follows_mouse     yes
@@ -390,16 +397,16 @@ bindsym $mod+Ctrl+Shift+$up move workspace to output up
 bindsym $mod+Ctrl+Shift+$right move workspace to output right
 
 # Workspace back and forth (with/without active container)
-workspace_auto_back_and_forth no
+workspace_auto_back_and_forth yes
 bindsym $mod+Shift+Tab move container to workspace back_and_forth; workspace back_and_forth
 bindsym $mod+Tab workspace back_and_forth
 bindsym mod1+Tab workspace back_and_forth
 
 # Split in horizontal orientation
-bindsym $mod+g split h;exec notify-send 'split horizontally'
+bindsym $mod+h split h;exec notify-send 'split horizontally'
 
 # Split in vertical orientation
-bindsym $mod+v split v;exec notify-send 'split vertically'
+bindsym $mod+k split v;exec notify-send 'split vertically'
 
 # Toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -409,14 +416,14 @@ bindsym $mod+shift+f exec ~/.config/sway/maximize.sh
 
 # Change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+b layout tabbed
 bindsym $mod+p layout toggle split
 
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-bindsym $mod+s floating enable
-bindsym $mod+t floating disable
+#bindsym $mod+s floating enable
+#bindsym $mod+t floating disable
 
 # Change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -495,8 +502,10 @@ bindsym {
 # Switch to workspace with urgent window
 bindsym $mod+u [urgent=latest] focus
 
+
 # Switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
+
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+shift+r mode "resize"
