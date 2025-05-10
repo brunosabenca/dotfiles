@@ -1,96 +1,45 @@
-##########################################################################
-#                                  variables                             #
+
+#########################################################################
+#                                  general                               #
 ##########################################################################
 
+# Set mod key (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4
+
+# Movement keys
+set $left n
+set $down e
+set $up i
+set $right o
+
+# Terminal
+set $term env kitty
+
+# Browser
+set $browser firefox
+
+# Colours
 set $cl_high #009ddc
 set $cl_indi #d9d8d8
 set $cl_back #231f20
 set $cl_fore #d9d8d8
 set $cl_urge #ee2e24
 
-# Colors                border   bg       text     indi     childborder
+# Border colours        border   bg       text     indi     childborder
 client.focused          $cl_high $cl_high $cl_fore $cl_indi $cl_high
 client.focused_inactive $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.unfocused        $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
 
-#########################################################################
-#                                  input                                 #
-##########################################################################
-
-# Kensington Orbit
-#input "1149:4130:Kensington_USB_Orbit" {
-#    accel_profile       adaptive
-#    middle_emulation    enabled
-#    natural_scroll      enabled
-#    left_handed         false
-#    scroll_button       button3
-#    scroll_factor       0.5
-#    pointer_accel       1
-#}
-
-# DEFT Pro
-input "1390:305:ELECOM_TrackBall_Mouse_DEFT_Pro_TrackBall_Mouse" {
-    natural_scroll      enabled
-    scroll_button       BTN_BACK
-    scroll_factor       0.5
-    accel_profile       adaptive
-    middle_emulation    false
-    left_handed         false
-    pointer_accel       0.5
-}
-
-# SteelSeries Rival
-input "4152:5904:SteelSeries_SteelSeries_Rival_300_Gaming_Mouse" {
-    accel_profile       flat
-    scroll_button       button2
-    natural_scroll      false
-    scroll_method       on_button_down
-}
-
-# Trackpoint
-input "2:10:TPPS/2_IBM_TrackPoint" {
-    accel_profile       adaptive
-    pointer_accel       -0.4
-    natural_scroll      enabled
-}
-
-# Touchpad
-input "1739:0:Synaptics_TM3053-003" {
-    events              disabled
-}
-
-# Keyboard: Anne Pro 2
-input "1241:41619:OBINS_OBINS\nAnnePro2" {
-    xkb_layout   us
-    xkb_variant  altgr-intl
-    xkb_options  nodeadkeys,caps:none
-}
-
-# Keyboard: Internal
-input "1:1:AT_Translated_Set_2_keyboard" {
-    xkb_layout   us
-    xkb_variant  altgr-intl
-    xkb_options  nodeadkeys,caps:none
-}
- 
-
-#########################################################################
-#                                  general                               #
-##########################################################################
-
-# Set the background color or wallpaper
+# Backgrounds
 #output * bg #008081 solid_color
 output * bg /home/bruno/.config/wall.png fill
 
-# Set the font
+# Font
 font pango:Hack, 11
 
 # Automatically hide mouse pointer when inactive
 #seat * hide_cursor 2000
-
-# Set mod key (Mod1=<Alt>, Mod4=<Super>)
-set $mod Mod4
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -115,14 +64,14 @@ bindsym --whole-window $mod+Shift+button3 floating toggle
 bindsym --whole-window $mod+Control+button1 workspace prev
 bindsym --whole-window $mod+Control+button3 workspace next
 
-# umpv: 
+# umpv
 bindsym {
-    $mod+Shift+comma    exec zsh -c 'echo "playlist-prev" > /home/heikai/.umpv_fifo'
-    $mod+Shift+period   exec zsh -c 'echo "playlist-next" > /home/heikai/.umpv_fifo'
+    $mod+Shift+comma    exec zsh -c 'echo "playlist-prev" > /home/bruno/.umpv_fifo'
+    $mod+Shift+period   exec zsh -c 'echo "playlist-next" > /home/bruno/.umpv_fifo'
 }
 
 # Edit config
-bindsym $mod+shift+Escape exec gnvim /home/heikai/.config/sway/config
+bindsym $mod+shift+Escape exec neovide /home/bruno/.config/sway/config
 
 # Take screenshots
 bindsym --release {
@@ -161,7 +110,7 @@ bindsym {
 }
 
 # Start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec $term
 
 # Start a floating terminal
 #bindsym $mod+Shift+v exec termite -e fish --name "floating_termite"
@@ -206,16 +155,16 @@ bindsym {
 for_window [title="^launcher$"] floating enable
 
 set $launcher dmenu_path | fzf | xargs swaymsg exec
-#set $launcher /home/heikai/bin/sway-launcher
-#set $dlauncher /home/heikai/bin/j4-launcher
+#set $launcher /home/bruno/bin/sway-launcher
+#set $dlauncher /home/bruno/bin/j4-launcher
 
 bindsym $mod+d exec wofi --show drun
 
 
 #bindsym $mod+d exec zsh -c 'rofi -show combi -combi-modi "run#drun" -modi combi'
 
-#bindsym mod1+space exec /home/heikai/bin/rofi-spotlight.sh
-#bindsym mod1+Tab exec /home/heikai/bin/rofi-alt-tab.sh
+#bindsym mod1+space exec /home/bruno/bin/rofi-spotlight.sh
+#bindsym mod1+Tab exec /home/bruno/bin/rofi-alt-tab.sh
 
 ##########################################################################
 #                                gap settings                            #
@@ -295,12 +244,12 @@ mode "$mode_gaps_outer" {
 #assign [class="Emacs"] number 3
 assign [class="TelegramDesktop"] number 8
 assign [app_id="sublime_merge"] number 5
-assign [app_id="gnvim"] number 4
+assign [app_id="neovide"] number 4
 
 bindsym $mod+w exec '~/.config/sway/run-or-raise firefox firefox'
 bindsym $mod+t exec '~/.config/sway/run-or-raise Kitty kitty'
-bindsym $mod+g exec '~/.config/sway/run-or-raise sublime_merge smerge'
-bindsym $mod+v exec '~/.config/sway/run-or-raise gnvim gnvim'
+#bindsym $mod+g exec '~/.config/sway/run-or-raise sublime_merge smerge'
+bindsym $mod+v exec '~/.config/sway/run-or-raise neovide neovide'
 
 #bindsym $mod+shift+f exec fsearch
 bindsym $mod+r exec kitty -e ranger
@@ -314,6 +263,9 @@ bindsym $mod+shift+x exec lxappearance
 ##########################################################################
 #                                   rules                                #
 ##########################################################################
+
+# to get App id:
+# swaymsg -t get_tree | grep app_id
 
 for_window [app_id="albert"] sticky enable
 for_window [app_id="firefox"] inhibit_idle fullscreen
@@ -356,11 +308,6 @@ for_window [app_id="^.*"] border pixel $borders
 ##########################################################################
 #                                   focus                                #
 ##########################################################################
-
-set $left n
-set $down e
-set $up i
-set $right o
 
 # Change focus
 focus_follows_mouse     yes
@@ -492,7 +439,7 @@ bindsym {
 }
 
 # Rename workspace with i3-input using numbers and text
-#bindsym $mod+k exec /home/heikai/bin/sway-rename-workspace
+#bindsym $mod+k exec /home/bruno/bin/sway-rename-workspace
 
 # Switch to workspace with urgent window
 bindsym $mod+u [urgent=latest] focus
@@ -592,6 +539,59 @@ exec_always import-gsettings \
     icon-theme:gtk-icon-theme-name \
     cursor-theme:gtk-cursor-theme-name
 
+#########################################################################
+#                                  input                                 #
+##########################################################################
+
+# Kensington Orbit
+#input "1149:4130:Kensington_USB_Orbit" {
+#    accel_profile       adaptive
+#    middle_emulation    enabled
+#    natural_scroll      enabled
+#    left_handed         false
+#    scroll_button       button3
+#    scroll_factor       0.5
+#    pointer_accel       1
+#}
+
+# DEFT Pro
+input "1390:305:ELECOM_TrackBall_Mouse_DEFT_Pro_TrackBall_Mouse" {
+    natural_scroll      enabled
+    scroll_button       BTN_BACK
+    scroll_factor       0.5
+    accel_profile       adaptive
+    middle_emulation    false
+    left_handed         false
+    pointer_accel       0.5
+}
+
+# SteelSeries Rival
+input "4152:5904:SteelSeries_SteelSeries_Rival_300_Gaming_Mouse" {
+    accel_profile       flat
+    scroll_button       button2
+    natural_scroll      false
+    scroll_method       on_button_down
+}
+
+# Trackpoint
+input "2:10:TPPS/2_IBM_TrackPoint" {
+    accel_profile       adaptive
+    pointer_accel       -0.4
+    natural_scroll      enabled
+}
+
+# Touchpad
+input "1739:0:Synaptics_TM3053-003" {
+    events              disabled
+}
+
+# Keyboard: Internal
+input "1:1:AT_Translated_Set_2_keyboard" {
+    xkb_layout   us
+    xkb_variant  altgr-intl
+    xkb_options  nodeadkeys,caps:none
+}
+
 ##########################################################################
 #                            shut down / restart                         #
 ##########################################################################
@@ -615,7 +615,14 @@ mode "$mode_system" {
     }
 }
 
+bar {
+    swaybar_command waybar
+}
+
 exec ~/.config/sway/startup.sh
+
+# Fixes to make waybar work
+exec dbus-sway-environment
 
 include ~/.config/sway/host_specific_config
 

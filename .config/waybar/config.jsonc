@@ -1,182 +1,194 @@
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 40, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 3, // Gaps between modules (4px)
-    // Choose the order of the modules
-    "modules-left": [
-      "sway/workspaces",
-      "sway/mode",
-      "sway/scratchpad",
-      "custom/media"
+  // "layer": "top", // Waybar at top layer
+  // "position": "bottom", // Waybar position (top|bottom|left|right)
+  "height": 40, // Waybar height (to be removed for auto height)
+  // "width": 1280, // Waybar width
+  "spacing": 3, // Gaps between modules (4px)
+  // Choose the order of the modules
+  "modules-left": [
+    "sway/workspaces",
+    "sway/mode",
+    "sway/scratchpad",
+    "custom/media"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "mpd",
+    "pulseaudio",
+    "network",
+    "battery",
+    "tray",
+    "power-profiles-daemon",
+    "idle_inhibitor",
+    "custom/power"
+  ],
+  // Modules configuration
+  "sway/workspaces": {
+    // "disable-scroll": true,
+    "all-outputs": true,
+    // "warp-on-scroll": false,
+    // "format": "{name}: {icon}",
+    // "format-icons": {
+    // "1": "",
+    // "2": "",
+    // "3": "",
+    // "4": "",
+    // "5": "",
+    // "urgent": "",
+    // "focused": "",
+    // "default": ""
+    // }
+  },
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "sway/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": [
+      "",
+      ""
     ],
-    "modules-center": [
-      "clock"
-    ],
-    "modules-right": [
-      "mpd",
-      "pulseaudio",
-      "network",
-      "battery",
-      "tray",
-      "power-profiles-daemon",
-      "idle_inhibitor",
-      "custom/power"
-    ],
-    // Modules configuration
-    "sway/workspaces": {
-        // "disable-scroll": true,
-        "all-outputs": true,
-        // "warp-on-scroll": false,
-        // "format": "{name}: {icon}",
-        // "format-icons": {
-            // "1": "",
-            // "2": "",
-            // "3": "",
-            // "4": "",
-            // "5": "",
-            // "urgent": "",
-            // "focused": "",
-            // "default": ""
-        // }
-    },
-    "sway/mode": {
-      "format": "<span style=\"italic\">{}</span>"
-    },
-    "sway/scratchpad": {
-      "format": "{icon} {count}",
-      "show-empty": false,
-      "format-icons": ["", ""],
-      "tooltip": true,
-      "tooltip-format": "{app}: {title}"
-    },
-    "idle_inhibitor": {
-      "format": "{icon}",
-      "format-icons":
-      {
-        "activated": "",
-        "deactivated": ""
-      }
-    },
-    "tray": {
-      "icon-size": 21,
-      "spacing": 10
-    },
-    "clock": {
-        // https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-        "timezone": "Europe/Amsterdam",
-        "format": "{:%H:%M}",
-        "format-alt": "{:%d/%m/%Y %A %H:%M %Z}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "calendar": {
-          "mode"          : "year",
-          "mode-mon-col"  : 3,
-          "weeks-pos"     : "right",
-          "on-scroll"     : 1,
-          "format": {
-            "months":     "<span color='#ffead3'><b>{}</b></span>",
-            "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-            "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-            "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-            "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-          }
-        },
-        "on-click": "date | wl-copy",
-        "on-click-right": "date | wl-copy"
-    },
-    "battery": {
-      "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-      },
-      "format": "{capacity}% {icon}",
-      "format-full": "{capacity}% {icon}",
-      "format-charging": "{capacity}% ",
-      "format-plugged": "{capacity}% ",
-      "format-alt": "{time} {icon}",
-      "format-icons": ["", "", "", "", ""],
-      "signal": 8,
-      "interval": 30
-      // "format-good": "", // An empty format will hide the module
-      // "format-full": "",
-    },
-    "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "signal": 8, // note this seems to be broken on non-custom modules?
-      "interval": 30,
-      "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
-      }
-    },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "    {essid} ({signalStrength}%)",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
-    "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}%  {format_source}",
-        "format-bluetooth-muted": "🔇  {format_source}",
-        "format-muted": "0% 🔇 {format_source}",
-        "format-source": "",
-        "format-source-muted": "",
-        "format-icons": {
-          "headphone": "",
-          "hands-free": "📻",
-          "headset": "🎧",
-          "phone": "",
-          "portable": "",
-          "car": "",
-          "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
-    },
-    "mpd": {
-      "tooltip": false,
-      "format": "{stateIcon} {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
-      "format-disconnected": "X",
-      "format-stopped": "⏹",
-      "state-icons": {
-        "playing": "",
-        "paused": ""
-      },
-      "on-click": "rmpc togglepause",
-      "on-click-right": "rmpc next"
-    },
-    "custom/media": {
-      "format": "{icon} {text}",
-      "return-type": "json",
-      "max-length": 40,
-      "format-icons": {
-        "spotify": "",
-        "default": "🎜"
-      },
-      "escape": true,
-      "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
-    "custom/power": {
-      "format" : " ⏻ ",
-      "tooltip": false,
-      "menu": "on-click",
-      "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-      "menu-actions": {
-        "shutdown": "systemctl poweroff",
-        "reboot": "systemctl reboot",
-        "suspend": "systemctl suspend",
-        "hibernate": "systemctl hibernate"
-      }
+    "tooltip": true,
+    "tooltip-format": "{app}: {title}"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
     }
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+  "clock": {
+    // https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    "timezone": "Europe/London",
+    "format": "{:%H:%M}",
+    "format-alt": "{:%d/%m/%Y %A %H:%M %Z}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "on-click": "date | wl-copy",
+    "on-click-right": "date | wl-copy"
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "signal": 8,
+    "interval": 30
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "signal": 8, // note this seems to be broken on non-custom modules?
+    "interval": 30,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
+  },
+  "network": {
+    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    "format-wifi": "    {essid} ({signalStrength}%)",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}%  {format_source}",
+    "format-bluetooth-muted": "🔇  {format_source}",
+    "format-muted": "0% 🔇 {format_source}",
+    "format-source": "",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "📻",
+      "headset": "🎧",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol"
+  },
+  "mpd": {
+    "tooltip": false,
+    "format": "{stateIcon} {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+    "format-disconnected": "X",
+    "format-stopped": "⏹",
+    "state-icons": {
+      "playing": "",
+      "paused": ""
+    },
+    "on-click": "rmpc togglepause",
+    "on-click-right": "rmpc next"
+  },
+  "custom/media": {
+    "format": "{icon} {text}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "default": "🎜"
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  },
+  "custom/power": {
+    "format": " ⏻ ",
+    "tooltip": false,
+    "menu": "on-click",
+    "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+    "menu-actions": {
+      "shutdown": "systemctl poweroff",
+      "reboot": "systemctl reboot",
+      "suspend": "systemctl suspend",
+      "hibernate": "systemctl hibernate"
+    }
+  }
 }
