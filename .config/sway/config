@@ -81,7 +81,7 @@ input "1:1:AT_Translated_Set_2_keyboard" {
 
 # Set the background color or wallpaper
 #output * bg #008081 solid_color
-output * bg /home/heikai/.config/wall.png fill
+output * bg /home/bruno/.config/wall.png fill
 
 # Set the font
 font pango:Hack, 11
@@ -161,7 +161,7 @@ bindsym {
 }
 
 # Start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 
 # Start a floating terminal
 #bindsym $mod+Shift+v exec termite -e fish --name "floating_termite"
@@ -205,16 +205,11 @@ bindsym {
 
 for_window [title="^launcher$"] floating enable
 
-#set $launcher dmenu_path | fzf | xargs swaymsg exec
+set $launcher dmenu_path | fzf | xargs swaymsg exec
 #set $launcher /home/heikai/bin/sway-launcher
-set $dlauncher /home/heikai/bin/j4-launcher
+#set $dlauncher /home/heikai/bin/j4-launcher
 
-bindsym $mod+d exec rofi -show run
-#exec export QT_QPA_PLATFORMTHEME="" && albert
-#bindsym $mod+d exec albert toggle
-#bindsym $mod+d exec alacritty --dimensions 64 16 --title 'launcher' -e sh -c \'$launcher\'
-#bindsym $mod+Shift+d exec rofi -show drun
-#bindsym $mod+d exec alacritty --dimensions 64 16 --title 'launcher' -e sh -c \'$dlauncher\'
+bindsym $mod+d exec wofi --show drun
 
 
 #bindsym $mod+d exec zsh -c 'rofi -show combi -combi-modi "run#drun" -modi combi'
@@ -302,14 +297,13 @@ assign [class="TelegramDesktop"] number 8
 assign [app_id="sublime_merge"] number 5
 assign [app_id="gnvim"] number 4
 
-
-bindsym $mod+w exec '~/.config/sway/run-or-raise firefoxdeveloperedition firefox-developer-edition'
-bindsym $mod+t exec '~/.config/sway/run-or-raise Alacritty alacritty'
+bindsym $mod+w exec '~/.config/sway/run-or-raise firefox firefox'
+bindsym $mod+t exec '~/.config/sway/run-or-raise Kitty kitty'
 bindsym $mod+g exec '~/.config/sway/run-or-raise sublime_merge smerge'
 bindsym $mod+v exec '~/.config/sway/run-or-raise gnvim gnvim'
 
 #bindsym $mod+shift+f exec fsearch
-bindsym $mod+r exec alacritty -e ranger
+bindsym $mod+r exec kitty -e ranger
 #bindsym $mod+shift+e exec gnvim
 
 #bindsym $mod+grave exec "urxvt -geometry 35x9 -e tty-clock -b -c -C 3 -D"
