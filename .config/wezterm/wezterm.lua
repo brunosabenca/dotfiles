@@ -3,7 +3,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- Command to find options: wezterm ls-fonts --list-system
-config.font = wezterm.font("FantasqueSansM Nerd Font", { weight = "Regular", stretch = "Normal", style = "Normal" }) -- /etc/profiles/per-user/bruno/share/fonts/truetype/NerdFonts/FantasqueSansM/FantasqueSansMNerdFont-Regular.ttf, FontConfig
+config.font = wezterm.font("FantasqueSansM Nerd Font", { weight = "Regular", stretch = "Normal", style = "Normal" })
 
 config.font_size = 14
 config.line_height = 1.2
