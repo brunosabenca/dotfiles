@@ -2,10 +2,7 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.font = wezterm.font_with_fallback({
-	{ family = "PragmataPro", weight = "Regular" },
-	"Symbols Nerd Font",
-})
+config.font = wezterm.font("FantasqueSansM Nerd Font", { weight = "Regular", stretch = "Normal", style = "Normal" }) -- /etc/profiles/per-user/bruno/share/fonts/truetype/NerdFonts/FantasqueSansM/FantasqueSansMNerdFont-Regular.ttf, FontConfig
 
 config.font_size = 14
 config.line_height = 1.2
@@ -24,5 +21,7 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
+
+config.use_fancy_tab_bar = false
 
 return config
