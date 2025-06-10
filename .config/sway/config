@@ -13,7 +13,7 @@ set $up i
 set $right o
 
 # Terminal
-set $term env kitty
+set $term env wezterm
 
 # Browser
 set $browser firefox
@@ -32,8 +32,8 @@ client.unfocused        $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
 
 # Backgrounds
-#output * bg #008081 solid_color
-output * bg /home/bruno/.config/wall.png fill
+output * bg #008081 solid_color
+#output * bg /home/bruno/.config/wall.png fill
 
 # Font
 font pango:Hack, 11
@@ -158,7 +158,7 @@ set $launcher dmenu_path | fzf | xargs swaymsg exec
 #set $launcher /home/bruno/bin/sway-launcher
 #set $dlauncher /home/bruno/bin/j4-launcher
 
-bindsym $mod+d exec wofi --show drun
+bindsym $mod+d exec wofi --show drun --prompt search
 
 
 #bindsym $mod+d exec zsh -c 'rofi -show combi -combi-modi "run#drun" -modi combi'
@@ -179,8 +179,8 @@ bindsym $mod+d exec wofi --show drun
 #}
 
 # Set inner/outer gaps
-gaps inner 0
-gaps outer 0
+#gaps inner 10
+#gaps outer 10
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -241,21 +241,15 @@ mode "$mode_gaps_outer" {
 
 
 # Open applications on specific workspaces
-#assign [class="Emacs"] number 3
-assign [class="TelegramDesktop"] number 8
-assign [app_id="sublime_merge"] number 5
 assign [app_id="neovide"] number 4
+assign [app_id="discord"] number 8
 
 bindsym $mod+w exec '~/.config/sway/run-or-raise firefox firefox'
-bindsym $mod+t exec '~/.config/sway/run-or-raise Kitty kitty'
-#bindsym $mod+g exec '~/.config/sway/run-or-raise sublime_merge smerge'
+bindsym $mod+t exec '~/.config/sway/run-or-raise org.wezfurlong.wezterm wezterm'
 bindsym $mod+v exec '~/.config/sway/run-or-raise neovide neovide'
 
-#bindsym $mod+shift+f exec fsearch
 bindsym $mod+r exec kitty -e ranger
-#bindsym $mod+shift+e exec gnvim
 
-#bindsym $mod+grave exec "urxvt -geometry 35x9 -e tty-clock -b -c -C 3 -D"
 bindsym $mod+grave exec dmenuunicode
 bindsym mod1+shift+c exec galculator
 bindsym $mod+shift+x exec lxappearance
@@ -267,14 +261,8 @@ bindsym $mod+shift+x exec lxappearance
 # to get App id:
 # swaymsg -t get_tree | grep app_id
 
-for_window [app_id="albert"] sticky enable
 for_window [app_id="firefox"] inhibit_idle fullscreen
-for_window [class="google-chrome-stable"] inhibit_idle fullscreen
-
-for_window [app_id="jetbrains-phpstorm" instance="sun-awt-X11-XWindowPeer"] focus
-
 #for_window [app_id="mpv"] sticky enable; border none
-
 for_window [app_id="mpv"] \
         floating   enable; \
         sticky     enable; \
@@ -283,23 +271,24 @@ for_window [app_id="mpv"] \
         resize     set      608  342; \
         move       position 1312 719
 
-#Floating
+# Floating Windows
+#
 #for_window [window_role="pop-up"] floating enable; move absolute position center
+for_window [title = ".*Bitwarden.*"] floating enable
 for_window [app_id="qmmp"] floating enable; border none
-for_window [class="Lxappearance"] floating enable; move absolute position center
+#for_window [class="Lxappearance"] floating enable; move absolute position center
 for_window [app_id="Keybase"] floating enable; move position mouse
 for_window [app_id="imv"] floating enable; move absolute position center
 for_window [app_id="galculator"] floating enable; move absolute position center
-for_window [class="pavucontrol"] floating enable; move absolute position center
+#for_window [class="pavucontrol"] floating enable; move absolute position center
 for_window [app_id="fsearch"] floating enable; move absolute position center
 for_window [title="Select Folder"] floating enable; move absolute position center
-for_window [instance="^alsamixer$" app_id="^URxvt$"] floating enable; move absolute position center
+#for_window [instance="^alsamixer$" app_id="^URxvt$"] floating enable; move absolute position center
 for_window [title="tty-clock"] floating enable
-#for_window [class="KeePassXC" instance="keepassxc"] floating enable
-for_window [app_id="File-roller" instance="file-roller"] floating enable
+#for_window [app_id="File-roller" instance="file-roller"] floating enable
 
 # Borderless
-for_window [window_role="browser"] border pixel none
+#for_window [window_role="browser"] border pixel none
 for_window [app_id="firefoxdeveloperedition"] border pixel none
 
 # Disable window titlebars entirely
@@ -320,6 +309,12 @@ bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
 # Move focused window
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
@@ -337,6 +332,12 @@ bindsym $mod+Ctrl+Shift+$left move workspace to output left
 bindsym $mod+Ctrl+Shift+$down move workspace to output down
 bindsym $mod+Ctrl+Shift+$up move workspace to output up
 bindsym $mod+Ctrl+Shift+$right move workspace to output right
+
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Ctrl+Shift+Left move workspace to output left
+bindsym $mod+Ctrl+Shift+Down move workspace to output down
+bindsym $mod+Ctrl+Shift+Up move workspace to output up
+bindsym $mod+Ctrl+Shift+Right move workspace to output right
 
 # Workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
@@ -554,6 +555,11 @@ exec_always import-gsettings \
 #    pointer_accel       1
 #}
 
+input type:keyboard {
+  repeat_delay 250
+  repeat_rate 75
+}
+
 # DEFT Pro
 input "1390:305:ELECOM_TrackBall_Mouse_DEFT_Pro_TrackBall_Mouse" {
     natural_scroll      enabled
@@ -619,10 +625,18 @@ bar {
     swaybar_command waybar
 }
 
-exec ~/.config/sway/startup.sh
+
+# Start network manager tray applet
+exec_always --no-startup-id nm-applet --indicator &
+
+# Start bluetooth tray applet
+exec_always --no-startup-id blueman-applet &
 
 # Fixes to make waybar work
 exec dbus-sway-environment
+
+# Start window switch notification script
+exec_always --no-startup-id flashfocus &
 
 include ~/.config/sway/host_specific_config
 
