@@ -299,7 +299,7 @@ for_window [app_id="^.*"] border pixel $borders
 ##########################################################################
 
 # Change focus
-focus_follows_mouse     yes
+focus_follows_mouse     no
 popup_during_fullscreen smart
 focus_on_window_activation focus
 
@@ -540,7 +540,7 @@ exec_always import-gsettings \
     icon-theme:gtk-icon-theme-name \
     cursor-theme:gtk-cursor-theme-name
 
-#########################################################################
+##########################################################################
 #                                  input                                 #
 ##########################################################################
 
@@ -637,6 +637,17 @@ exec dbus-sway-environment
 
 # Start window switch notification script
 exec_always --no-startup-id flashfocus &
+
+
+##########################################################################
+#                               displays                                 #
+##########################################################################
+
+# todo: configure this in host_specific_config
+set $MON_0 DP-4
+set $MON_1 DP-5
+exec_always swaymsg output $MON_1 res 2560x1440@60hz scale 1.0 transform normal pos 2560 0 enable
+exec_always swaymsg output $MON_0 res 2560x1440@60hz scale 1.0 transform normal pos 0 0 enable
 
 include ~/.config/sway/host_specific_config
 
