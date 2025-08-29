@@ -1,5 +1,4 @@
 local wezterm = require("wezterm")
-
 local config = wezterm.config_builder()
 
 config.default_prog = { '/usr/bin/fish', '-l' }
@@ -7,7 +6,7 @@ config.default_prog = { '/usr/bin/fish', '-l' }
 -- Command to find options: wezterm ls-fonts --list-system
 config.font = wezterm.font("Monaspace Krypton Frozen", { weight = "Medium", stretch = "Normal", style = "Normal" })
 
-config.font_size = 14
+config.font_size = 12
 config.line_height = 1.2
 config.color_scheme = "Catppuccin Mocha"
 
