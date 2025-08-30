@@ -272,18 +272,16 @@ for_window [app_id="mpv"] \
         move       position 1312 719
 
 # Floating Windows
-
-#for_window [window_role="pop-up"] floating enable; move absolute position center
-for_window [title = ".*Bitwarden.*"] floating enable
 for_window [app_id="qmmp"] floating enable; border none
 for_window [app_id="Keybase"] floating enable; move position mouse
 for_window [app_id="imv"] floating enable; move absolute position center
 for_window [app_id="galculator"] floating enable; move absolute position center
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable; move absolute position center
 for_window [app_id="fsearch"] floating enable; move absolute position center
-for_window [title="Select Folder"] floating enable; move absolute position center
-for_window [title="tty-clock"] floating enable
 for_window [app_id="org.gnome.FileRoller"] floating enable
+for_window [app_id="xdg-desktop-portal-gtk"] floating enable; move absolute position center
+for_window [title="Select Folder"] floating enable; move absolute position center
+#for_window [app_id="^firefox*" title="^Extension: *"]; floating enable; move absolute position center
 
 # Borderless
 #for_window [window_role="browser"] border pixel none
