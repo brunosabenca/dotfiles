@@ -470,10 +470,10 @@ mode "resize" {
 
 # Multimedia keys
 bindsym {
-    XF86AudioRaiseVolume exec "amixer -D pulse sset Master '3%+'"
-    XF86AudioLowerVolume exec "amixer -D pulse sset Master '1%-'"
-    XF86AudioMute        exec "pactl set-sink-mute 0 toggle"
-    XF86AudioMicMute     exec "pactl set-source-mute 1 toggle"
+    XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +3%'
+    XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
+    XF86AudioMute        exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
+    XF86AudioMicMute     exec "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
     XF86AudioPlay        exec "mpc toggle"
     XF86AudioStop        exec "mpc stop"
     XF86AudioNext        exec "mpc next"
