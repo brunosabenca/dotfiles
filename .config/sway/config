@@ -36,7 +36,7 @@ output * bg #008081 solid_color
 #output * bg /home/bruno/.config/wall.png fill
 
 # Font
-font pango:Hack, 11
+font pango:Monaspace Krypton Frozen, 10
 
 # Automatically hide mouse pointer when inactive
 #seat * hide_cursor 2000
@@ -526,7 +526,7 @@ exec_always {
     gsettings set $gnome-schema icon-theme 'Flat-Remix-Yellow-Dark'
     gsettings set $gnome-schema cursor-theme 'capitaine-cursors-light'
     gsettings set $gnome-schema font-name 'Liberation Sans 11'
-    gsettings set $gnome-schema monospace-font-name 'Hack 11'
+    gsettings set $gnome-schema monospace-font-name 'Monaspace Krypton Frozen 11'
 }
 
 # Import Gnome settings
