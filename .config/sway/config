@@ -125,12 +125,12 @@ bindsym {
 # Control display brigthness
 bindsym {
     XF86MonBrightnessUp exec \
-        BRIGHT=$(sudo bright_up) && \
-        notify-send -u low "Brightness increased: ${BRIGHT}"
+        brightnessctl set +5% && \
+        notify-send -u low "Brightness increased: $(brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}')%"
 
     XF86MonBrightnessDown exec \
-        BRIGHT=$(sudo bright_down) && \
-        notify-send -u low "Brightness decreased: ${BRIGHT}"
+        brightnessctl set 5%- && \
+        notify-send -u low "Brightness decreased: $(brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}')%"
 }
 
 # Toggle touchpad
