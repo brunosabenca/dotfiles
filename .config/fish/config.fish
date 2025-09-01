@@ -1,8 +1,10 @@
 if status is-interactive
-    source "$HOME/.cargo/env.fish"
     source ~/.aliases
     source ~/bin/scripts/bastion.sh
     source ~/.gl_aliases
+
+    fish_add_path "$HOME/.local/bin"
+    fish_add_path "$HOME/bin/scripts"
 
     set -gx CLAUDE_CODE_USE_BEDROCK 1
     set -gx AWS_REGION eu-west-1

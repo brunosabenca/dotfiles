@@ -1,6 +1,9 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.integrated_title_button_style = "Gnome"
+
 -- Command to find options: wezterm ls-fonts --list-system
 config.font = wezterm.font("Monaspace Krypton Frozen", { weight = "Medium", stretch = "Normal", style = "Normal" })
 

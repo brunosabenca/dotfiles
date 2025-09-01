@@ -1,0 +1,45 @@
+"https://github.com/JetBrains/ideavim/blob/master/doc/ideajoin-examples.md
+set ReplaceWithRegister
+set argtextobj
+set commentary
+set easymotion
+set exchange
+set ideajoin
+set multiple-cursors
+set surround
+set textobj-entire
+
+set showmode
+set incsearch
+
+"set relativenumber
+"set clipboard=ideaput,autoselect,exclude:cons\|linux,unnamed
+set clipboard+=unnamedplus
+
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+
+" <C-n> seems to me as a better solution than <M-n>
+map <C-n> <Plug>NextWholeOccurrence
+
+let mapleader=" "
+
+let g:EasyMotion_do_mapping = 1
+let g:EasyMotion_smartcase = 1
+
+nmap <leader>R :source ~/.ideavimrc<CR>
+vmap <leader>R :<Backspace><Backspace><Backspace><Backspace><Backspace>source ~/.ideavimrc<CR>
+
+map <leader>f <Action>(GotoFile)
+map <leader>s <Action>(Switcher)
+map <leader>p <Action>(FindInPath)
+map <leader>o <Action>(FileStructurePopup)
+
+" Reformat the current line only
+map <leader>l V<Action>(ReformatCode)
+
+" Press `S` in normal mode to activate AceJump mode before the caret
+nmap S <Action>(AceBackwardAction)
+
+" Press `s` in normal mode to activate AceJump mode after the caret
+nmap s <Action>(AceForwardAction)
