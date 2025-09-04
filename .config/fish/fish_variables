@@ -47,4 +47,4 @@ SETUVAR fish_pager_color_selected_background:\x1d
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/bruno/bin/scripts\x1e/home/bruno/\x2elocal/bin\x1e/home/bruno/\x2econfig/composer/vendor/bin\x1e/nix/var/nix/profiles/default/bin\x1e/home/bruno/\x2envm/versions/node/v22\x2e11\x2e0/bin
+SETUVAR fish_user_paths:/home/bruno/\x2etunnelto/bin\x1e/home/bruno/bin/scripts\x1e/home/bruno/\x2elocal/bin\x1e/home/bruno/\x2econfig/composer/vendor/bin\x1e/nix/var/nix/profiles/default/bin\x1e/home/bruno/\x2envm/versions/node/v22\x2e11\x2e0/bin

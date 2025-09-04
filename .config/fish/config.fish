@@ -3,14 +3,16 @@ if status is-interactive
     source ~/bin/scripts/bastion.sh
     source ~/.gl_aliases
 
-    fish_add_path "$HOME/.local/bin"
-    fish_add_path "$HOME/bin/scripts"
-
     set -gx CLAUDE_CODE_USE_BEDROCK 1
     set -gx AWS_REGION eu-west-1
     set -gx ANTHROPIC_SMALL_FAST_MODEL_AWS_REGION eu-west-1
     set -gx ANTHROPIC_MODEL 'arn:aws:bedrock:eu-west-1:792372355255:inference-profile/eu.anthropic.claude-sonnet-4-20250514-v1:0'
     set -gx ANTHROPIC_SMALL_FAST_MODEL 'arn:aws:bedrock:eu-west-1:792372355255:inference-profile/eu.anthropic.claude-3-haiku-20240307-v1:0'
+    set -gx TUNNELTO_INSTALL "/home/bruno/.tunnelto"
+
+    fish_add_path "$HOME/.local/bin"
+    fish_add_path "$HOME/bin/scripts"
+    fish_add_path "$TUNNELTO_INSTALL/bin"
 
     mise activate fish --shims | source
 
