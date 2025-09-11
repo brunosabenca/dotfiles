@@ -1,8 +1,6 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.default_prog = { "fish", "-l" }
-
 -- Command to find options: wezterm ls-fonts --list-system
 config.font = wezterm.font("Monaspace Krypton NF", { weight = "Medium", stretch = "Normal", style = "Normal" })
 
