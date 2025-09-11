@@ -248,7 +248,7 @@ bindsym $mod+w exec '~/.config/sway/run-or-raise firefox firefox'
 bindsym $mod+t exec '~/.config/sway/run-or-raise org.wezfurlong.wezterm wezterm'
 bindsym $mod+v exec '~/.config/sway/run-or-raise neovide neovide'
 
-bindsym $mod+r exec kitty -e ranger
+bindsym $mod+r exec wezterm -e ranger
 
 bindsym $mod+grave exec dmenuunicode
 bindsym mod1+shift+c exec galculator
