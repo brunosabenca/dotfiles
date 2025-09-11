@@ -22,7 +22,7 @@ config.window_padding = {
 }
 
 config.use_fancy_tab_bar = false
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+-- config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.integrated_title_button_style = "Gnome"
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = false
