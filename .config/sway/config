@@ -36,7 +36,7 @@ output * bg #008081 solid_color
 #output * bg /home/bruno/.config/wall.png fill
 
 # Font
-font pango:Monaspace Krypton Frozen, 10
+font pango:JetBrains Mono NF, 10
 
 # Automatically hide mouse pointer when inactive
 #seat * hide_cursor 2000

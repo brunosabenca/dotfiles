@@ -17,7 +17,7 @@ local custom_colors = {
 }
 
 -- Command to find options: wezterm ls-fonts --list-system
-config.font = wezterm.font("Monaspace Krypton NF", { weight = "Medium", stretch = "Normal", style = "Normal" })
+config.font = wezterm.font("JetBrains Mono NF", { weight = "Medium", stretch = "Normal", style = "Normal" })
 
 -- config.window_decorations = "RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
