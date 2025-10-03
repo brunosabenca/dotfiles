@@ -17,14 +17,14 @@ local custom_colors = {
 }
 
 -- Command to find options: wezterm ls-fonts --list-system
-config.font = wezterm.font("JetBrains Mono NF", { weight = "Medium", stretch = "Normal", style = "Normal" })
+-- config.font = wezterm.font("JetBrains Mono NF", { weight = "Medium", stretch = "Normal", style = "Normal" })
 
 -- config.window_decorations = "RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 3000
 config.default_workspace = "main"
 
-config.font_size = 12
+config.font_size = 16
 config.line_height = 1.2
 config.color_scheme = "Catppuccin Mocha"
 
