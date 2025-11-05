@@ -1,5 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dcolor\x3dbg\x2b\x3a\x23313244\x2cbg\x3a\x231E1E2E\x2cspinner\x3a\x23F5E0DC\x2chl\x3a\x23F38BA8\x20\x2d\x2dcolor\x3dfg\x3a\x23CDD6F4\x2cheader\x3a\x23F38BA8\x2cinfo\x3a\x23CBA6F7\x2cpointer\x3a\x23F5E0DC\x20\x2d\x2dcolor\x3dmarker\x3a\x23B4BEFE\x2cfg\x2b\x3a\x23CDD6F4\x2cprompt\x3a\x23CBA6F7\x2chl\x2b\x3a\x23F38BA8\x20\x2d\x2dcolor\x3dselected\x2dbg\x3a\x2345475A\x20\x2d\x2dcolor\x3dborder\x3a\x236C7086\x2clabel\x3a\x23CDD6F4
+SETUVAR --export MANPAGER:sh\x20\x2dc\x20\x27awk\x20\x27\x5c\x27\x27\x7b\x20gsub\x28/\x5cx1B\x5c\x5b\x5b0\x2d9\x3b\x5d\x2am/\x2c\x20\x22\x22\x2c\x20\x240\x29\x3b\x20gsub\x28/\x2e\x5cx08/\x2c\x20\x22\x22\x2c\x20\x240\x29\x3b\x20print\x20\x7d\x27\x5c\x27\x27\x20\x7c\x20bat\x20\x2dp\x20\x2dlman\x27
 SETUVAR __fish_initialized:3800
 SETUVAR _fisher_catppuccin_2F_fish_files:\x7e/\x2econfig/fish/themes/Catppuccin\x20Frappe\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Latte\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Macchiato\x2etheme\x1e\x7e/\x2econfig/fish/themes/Catppuccin\x20Mocha\x2etheme
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
@@ -47,4 +49,4 @@ SETUVAR fish_pager_color_selected_background:\x1d
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/bruno/\x2etunnelto/bin\x1e/home/bruno/bin/scripts\x1e/home/bruno/\x2elocal/bin\x1e/home/bruno/\x2econfig/composer/vendor/bin\x1e/nix/var/nix/profiles/default/bin\x1e/home/bruno/\x2envm/versions/node/v22\x2e11\x2e0/bin
+SETUVAR fish_user_paths:/bin\x1e/home/bruno/go/bin\x1e/home/bruno/\x2etunnelto/bin\x1e/home/bruno/bin/scripts\x1e/home/bruno/\x2elocal/bin\x1e/home/bruno/\x2econfig/composer/vendor/bin\x1e/nix/var/nix/profiles/default/bin\x1e/home/bruno/\x2envm/versions/node/v22\x2e11\x2e0/bin

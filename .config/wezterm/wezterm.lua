@@ -16,19 +16,27 @@ local custom_colors = {
 	yellow = "#df8e1d",
 }
 
+config.scrollback_lines = 100000
+
 -- Command to find options: wezterm ls-fonts --list-system
--- config.font = wezterm.font("JetBrains Mono NF", { weight = "Medium", stretch = "Normal", style = "Normal" })
+config.font = wezterm.font({
+	family = "JetBrains Mono",
+	weight = "Regular",
+	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+})
+config.font_size = 14
+config.line_height = 1.4
+-- config.freetype_load_target = "Light"
+-- config.freetype_load_flags = "NO_HINTING"
 
 -- config.window_decorations = "RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 3000
 config.default_workspace = "main"
 
-config.font_size = 16
+config.font_size = 12
 config.line_height = 1.2
 config.color_scheme = "Catppuccin Mocha"
-
-config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 -- Fixes weird issue with font sometimes having weird kerning
 config.cell_width = 1
@@ -140,65 +148,17 @@ config.key_tables = {
 }
 
 -- Tab bar
--- I don't like the look of "fancy" tab bar
 config.use_fancy_tab_bar = false
-config.status_update_interval = 1000
-config.tab_bar_at_bottom = true
-config.hide_tab_bar_if_only_one_tab = false
-wezterm.on("update-status", function(window, pane)
-	-- Workspace name
-	local stat = window:active_workspace()
-	local stat_color = custom_colors.red
-	-- It's a little silly to have workspace name all the time
-	-- Utilize this to display LDR or current key table name
-	if window:active_key_table() then
-		stat = window:active_key_table()
-		stat_color = custom_colors.cyan
-	end
-	if window:leader_is_active() then
-		stat = "LDR"
-		stat_color = custom_colors.magenta
-	end
-
-	local basename = function(s)
-		-- Nothing a little regex can't fix
-		return string.gsub(s, "(.*[/\\])(.*)", "%2")
-	end
-
-	-- Current working directory
-	local cwd = pane:get_current_working_dir()
-	if cwd then
-		cwd = basename(cwd.file_path) --> URL object introduced in 20240127-113634-bbcac864 (type(cwd) == "userdata")
-	-- cwd = basename(cwd) --> 20230712-072601-f4abf8fd or earlier version
-	else
-		cwd = ""
-	end
-
-	-- Current command
-	local cmd = pane:get_foreground_process_name()
-	-- CWD and CMD could be nil (e.g. viewing log using Ctrl-Alt-l)
-	cmd = cmd and basename(cmd) or ""
-
-	-- Left status (left of the tab line)
-	window:set_left_status(wezterm.format({
-		{ Foreground = { Color = stat_color } },
-		{ Text = "  " },
-		{ Text = wezterm.nerdfonts.oct_table .. "  " .. stat },
-		{ Text = " |" },
-	}))
-
-	-- Right status
-	window:set_right_status(wezterm.format({
-		-- Wezterm has a built-in nerd fonts
-		-- https://wezfurlong.org/wezterm/config/lua/wezterm/nerdfonts.html
-		{ Text = wezterm.nerdfonts.md_folder .. "  " .. cwd },
-		{ Text = " | " },
-		{ Foreground = { Color = custom_colors.yellow } },
-		{ Text = wezterm.nerdfonts.fa_code .. "  " .. cmd },
-		{ Text = "  " },
-	}))
-end)
 
 -- config.disable_default_key_bindings = false
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.integrated_title_button_style = "Gnome"
+config.hide_tab_bar_if_only_one_tab = false
+config.tab_bar_at_bottom = false
+
+-- Claude integration
+config.keys = {
+	{ key = "Enter", mods = "SHIFT", action = wezterm.action({ SendString = "\x1b\r" }) },
+}
 
 return config
