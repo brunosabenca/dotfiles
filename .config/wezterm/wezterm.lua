@@ -19,14 +19,14 @@ local custom_colors = {
 config.scrollback_lines = 100000
 
 -- Command to find options: wezterm ls-fonts --list-system
-config.font = wezterm.font({
-	family = "JetBrains Mono",
-	weight = "Regular",
-	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
-})
+-- config.font = wezterm.font({
+-- 	family = "JetBrains Mono",
+-- 	weight = "Regular",
+-- 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+-- })
 config.font_size = 14
-config.line_height = 1.4
--- config.freetype_load_target = "Light"
+config.line_height = 1.22
+config.freetype_load_target = "HorizontalLcd"
 -- config.freetype_load_flags = "NO_HINTING"
 
 -- config.window_decorations = "RESIZE"
@@ -34,20 +34,16 @@ config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 3000
 config.default_workspace = "main"
 
-config.font_size = 12
-config.line_height = 1.2
-config.color_scheme = "Catppuccin Mocha"
-
 -- Fixes weird issue with font sometimes having weird kerning
 config.cell_width = 1
 
 config.adjust_window_size_when_changing_font_size = false
-config.window_padding = {
-	left = 0,
-	right = 0,
-	top = 0,
-	bottom = 0,
-}
+--config.window_padding = {
+--	left = 0,
+--	right = 0,
+--	top = 0,
+--	bottom = 0,
+--}
 
 -- Keys
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
@@ -151,8 +147,8 @@ config.key_tables = {
 config.use_fancy_tab_bar = false
 
 -- config.disable_default_key_bindings = false
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-config.integrated_title_button_style = "Gnome"
+-- config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+-- config.integrated_title_button_style = "Gnome"
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = false
 
