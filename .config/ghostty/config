@@ -21,10 +21,12 @@
 # reloaded while running; some only apply to new windows and others may require
 # a full restart to take effect.
 
-shell-integration-features = sudo,ssh-env,ssh-terminfo
+shell-integration-features = sudo,ssh-env
 command = /usr/bin/fish --login --interactive
 
-theme = Catppuccin Mocha
+#theme = Catppuccin Mocha
+#theme = Dracula+
+theme = Cyberpunk
 
 font-family = "JetBrains Mono"
 font-size = 14
@@ -45,4 +47,4 @@ gtk-wide-tabs = false
 gtk-custom-css = tab-style.css
 
 keybind = ctrl+shift+w=close_surface
-
+keybind = alt+shift+b=write_scrollback_file:open

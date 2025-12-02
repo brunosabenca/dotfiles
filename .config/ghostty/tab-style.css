@@ -20,14 +20,14 @@ tabbar tabbox {
 tabbar tabbox tab {
   margin: 0;
   padding: 0;
-  color: #9ca3af;
-  background-color: #181825;
+  /*color: #9ca3af;*/
+  /*background-color: #181825;*/
   border-right: 1px solid #2c2c2c;
 }
 
 tabbar tabbox tab:selected {
-  background-color: #313244;
-  color: #ffffff;
+  /*background-color: #313244;*/
+  /*color: #ffffff;*/
 }
 
 tabbar tabbox tab label {

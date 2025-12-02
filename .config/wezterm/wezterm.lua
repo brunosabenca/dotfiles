@@ -1,22 +1,21 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
+local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
 local config = {}
+
 -- Use config builder object if possible
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- Settings
-config.color_scheme = "Catppuccin Mocha"
-local custom_colors = {
-	red = "#e64553",
-	cyan = "#04a5e5",
-	magenta = "#ea76cb",
-	yellow = "#df8e1d",
-}
+-- Default shell
+config.default_prog = { "/usr/bin/fish", "-l" }
 
+-- Settings
 config.scrollback_lines = 100000
+config.initial_rows = 35
+config.initial_cols = 160
 
 -- Command to find options: wezterm ls-fonts --list-system
 -- config.font = wezterm.font({
@@ -25,7 +24,7 @@ config.scrollback_lines = 100000
 -- 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 -- })
 config.font_size = 14
-config.line_height = 1.22
+config.line_height = 1.24
 config.freetype_load_target = "HorizontalLcd"
 -- config.freetype_load_flags = "NO_HINTING"
 
@@ -144,10 +143,10 @@ config.key_tables = {
 }
 
 -- Tab bar
-config.use_fancy_tab_bar = false
+config.use_fancy_tab_bar = true
 
 -- config.disable_default_key_bindings = false
--- config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 -- config.integrated_title_button_style = "Gnome"
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = false
@@ -156,5 +155,52 @@ config.tab_bar_at_bottom = false
 config.keys = {
 	{ key = "Enter", mods = "SHIFT", action = wezterm.action({ SendString = "\x1b\r" }) },
 }
+
+-- Colours
+local function scheme_for_appearance(appearance)
+	if appearance:find("Dark") then
+		return "Catppuccin Mocha"
+	else
+		return "Catppuccin Latte"
+	end
+end
+
+config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+
+config.cursor_blink_rate = 800
+
+tabline.setup({
+	options = {
+		icons_enabled = true,
+		theme = "Catppuccin Mocha",
+		tabs_enabled = true,
+		theme_overrides = {},
+		section_separators = {
+			left = wezterm.nerdfonts.pl_left_hard_divider,
+			right = wezterm.nerdfonts.pl_right_hard_divider,
+		},
+		component_separators = {
+			left = wezterm.nerdfonts.pl_left_soft_divider,
+			right = wezterm.nerdfonts.pl_right_soft_divider,
+		},
+		tab_separators = {
+			left = wezterm.nerdfonts.pl_left_hard_divider,
+			right = wezterm.nerdfonts.pl_right_hard_divider,
+		},
+	},
+	sections = {
+		tabline_a = { "mode" },
+		tabline_b = { "workspace" },
+		tabline_c = { " " },
+		tab_active = { "index", { "process", padding = { left = 0, right = 1 } } },
+		tab_inactive = { "index", { "process", padding = { left = 0, right = 1 } } },
+		tabline_x = { "ram", "cpu" },
+		tabline_y = { "datetime", "battery" },
+		tabline_z = { "domain" },
+	},
+	extensions = {},
+})
+
+tabline.apply_to_config(config)
 
 return config
