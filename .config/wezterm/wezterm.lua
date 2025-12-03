@@ -37,12 +37,6 @@ config.default_workspace = "main"
 config.cell_width = 1
 
 config.adjust_window_size_when_changing_font_size = false
---config.window_padding = {
---	left = 0,
---	right = 0,
---	top = 0,
---	bottom = 0,
---}
 
 -- Keys
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
@@ -202,5 +196,11 @@ tabline.setup({
 })
 
 tabline.apply_to_config(config)
+config.window_padding = {
+	left = 10,
+	right = 0,
+	bottom = 0,
+	top = 10,
+}
 
 return config
