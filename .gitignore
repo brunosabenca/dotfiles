@@ -1,11 +1,2 @@
-icons/
-.config/ranger/bookmarks
-.config/ranger/colorschemes/__init__.py
-.config/ranger/colorschemes/__pycache__/
-.config/ranger/__pycache__/
-.config/ranger/history
-.config/ranger/tagged
-.config/ranger/copy_buffer
-.config/ranger/plugins/__init__.py
-.config/ranger/plugins/__pycache__/
-.vim/bundle/
+.config/fish/fish_variables
+.config/fish/fish_plugins
