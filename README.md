@@ -2,45 +2,18 @@
       ██            ██     ████ ██  ██                
      ░██           ░██    ░██░ ░░  ░██                
      ░██  ██████  ██████ ██████ ██ ░██  █████   ██████
-  ██████ ██░░░░██░░░██░ ░░░██░ ░██ ░██ ██░░░██ ██░░░░ 
- ██░░░██░██   ░██  ░██    ░██  ░██ ░██░███████░░█████ 
-░██  ░██░██   ░██  ░██    ░██  ░██ ░██░██░░░░  ░░░░░██
-░░██████░░██████   ░░██   ░██  ░██ ███░░██████ ██████ 
- ░░░░░░  ░░░░░░     ░░    ░░   ░░ ░░░  ░░░░░░ ░░░░░░  
- 
+  ██████ ░██░░░██░░░██░ ░░░██░ ░██ ░██ ██░░░██ ██░░░░ 
+ ██░░░██ ░██   ░██  ░██    ░██  ░██ ░██░███████░░█████ 
+░██  ░██ ░██   ░██  ░██    ░██  ░██ ░██░██░░░░  ░░░░░██
+░░██████ ░░██████   ░░██   ░██  ░██ ███░░██████ ██████ 
+ ░░░░░░   ░░░░░░     ░░    ░░   ░░ ░░░  ░░░░░░ ░░░░░░  
+
 ```
 
-### First time setup
+Dotfiles managed as a submodule of the [nix config repo](https://github.com/brunosabenca/nix). Files mirror the `$HOME` directory structure.
+
+Clone the nix repo with submodules to get started:
 
 ```bash
-git clone https://github.com/brunosabenca/dotfiles
-chmod +x dotfiles/.config/dotfiles/bootstrap_dotfiles.sh
-#Open and modify file, because file is not usable by default for safety reasons
-vim ./dotfiles/.config/dotfiles/bootstrap_dotfiles.sh
-#then run
-./dotfiles/.config/dotfiles/bootstrap_dotfiles.sh
-```
-
-### Subsequent updating
-
-```bash
-#Custom git alias to update dotfiles
-config update
-```
-
-### Usage
-
-```bash
-config status
-config add .vimrc
-config commit -m "Add vimrc"
-config add .config/redshift.conf
-config commit -m "Add redshift config"
-config push
-```
-
-### Repo created using
-
-```bash
-git init --bare $HOME/.dotfiles
+git clone --recurse-submodules https://github.com/brunosabenca/nix
 ```
