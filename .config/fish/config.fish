@@ -1,7 +1,7 @@
 if status is-interactive
-    # Set GL specific stuff, should make this modular later
+    # Machine-specific config (e.g. work)
     if test -f ~/.gl_aliases
-        test -f ~/.gl_aliases; and source ~/.gl_aliases
+        source ~/.gl_aliases
         test -f ~/.aliases; and source ~/.aliases
         test -f ~/bin/scripts/bastion.sh; and source ~/bin/scripts/bastion.sh
 
@@ -20,7 +20,6 @@ if status is-interactive
 
     # Path additions
     fish_add_path "$HOME/.local/bin"
-    fish_add_path "$HOME/bin/scripts"
 
     # Environment variables
     set -gx EDITOR nvim
@@ -34,7 +33,7 @@ if status is-interactive
     abbr -a --position anywhere -- --help '--help | bat -plhelp'
     abbr -a --position anywhere -- -h '-h | bat -plhelp'
 
-    # Ues fd with bat preview
+    # Use fd with bat preview
     function fdp
         fd --type file --type symlink $argv -X bat
     end
@@ -44,9 +43,7 @@ if status is-interactive
     function starship_transient_prompt_func
         starship module character
     end
-end
 
-if status is-interactive && test -f ~/.config/fish/conf.d/git_fzf.fish
-    source ~/.config/fish/conf.d/git_fzf.fish
+    # git + fzf key bindings (defined in conf.d/git_fzf.fish)
     git_fzf_key_bindings
 end
