@@ -3,6 +3,20 @@ function music2kepler
     if test -z "$selected"
         return
     end
+
+    # Normalise cover art filename to cover.ext
+    for f in "$selected"/{cover,Cover,folder,Folder,album,Album,front,Front,albumart,AlbumArt}.{jpg,jpeg,png,webp}
+        if test -f "$f"
+            set ext (string match -r '\.[^.]+$' "$f")
+            set target "$selected/cover$ext"
+            if test "$f" != "$target"
+                mv "$f" "$target"
+                echo "Renamed "(basename "$f")" → cover$ext"
+            end
+            break
+        end
+    end
+
     set relative (string replace "/mnt/extra/Music/" "" $selected)
     lftp -u bruno,arstneio -e "mirror -R --only-newer --exclude-glob '*.flac' \"$selected\" \"foobar2000 Music Folder/$relative\"; bye" ftp://192.168.1.134
 end
