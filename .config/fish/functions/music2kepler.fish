@@ -8,22 +8,23 @@ function music2kepler
     set remote "foobar2000 Music Folder/$relative"
 
     # Find cover art
-    set cover_orig ""
+    set cover_src ""
     set cover_dest ""
     for f in "$selected"/{cover,Cover,folder,Folder,album,Album,front,Front,albumart,AlbumArt}.{jpg,jpeg,png,webp}
         if test -f "$f"
             set ext (string lower (string match -r '\.[^.]+$' "$f"))
-            set cover_orig (basename "$f")
+            set cover_src "$f"
             set cover_dest "cover$ext"
             break
         end
     end
 
-    # Mirror everything, then rename cover on remote if needed
-    set lftp_cmds "mirror -R --only-newer --exclude-glob '*.flac' --exclude-glob '*.ape' \"$selected\" \"$remote\""
-    if test -n "$cover_orig" -a "$cover_orig" != "$cover_dest"
-        set lftp_cmds "$lftp_cmds; mv \"$remote/$cover_orig\" \"$remote/$cover_dest\""
+    # Mirror everything except cover art and lossless sources
+    # then upload cover separately with normalised name
+    set put_cmd ""
+    if test -n "$cover_src"
+        set put_cmd "; put \"$cover_src\" -o \"$remote/$cover_dest\""
     end
 
-    lftp -u bruno,arstneio -e "$lftp_cmds; bye" ftp://192.168.1.134
+    lftp -u bruno,arstneio -e "mirror -R --only-newer --exclude-glob '*.flac' --exclude-glob '*.ape' --exclude '(?i)^(cover|folder|album|front|albumart)\.(jpg|jpeg|png|webp)$' \"$selected\" \"$remote\"$put_cmd; bye" ftp://192.168.1.134
 end
