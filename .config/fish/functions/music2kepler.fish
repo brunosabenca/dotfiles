@@ -51,5 +51,5 @@ function music2kepler
     end
 
     echo "Syncing to kepler..."
-    lftp -u bruno,arstneio -e "mirror -R --only-newer --exclude-glob '*.flac' --exclude-glob '*.ape' --exclude-glob '*.wv' $cover_exclude \"$selected\" \"$remote\"$put_cmd; bye" ftp://192.168.1.134
+    lftp -u bruno,arstneio -e "mirror -R --only-newer --exclude '/' --exclude-glob '*.flac' --exclude-glob '*.ape' --exclude-glob '*.wv' $cover_exclude \"$selected\" \"$remote\"$put_cmd; bye" ftp://192.168.1.134
 end
