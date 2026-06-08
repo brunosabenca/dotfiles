@@ -4,19 +4,34 @@ function music2kepler
         return
     end
 
-    # Normalise cover art filename to cover.ext
+    set relative (string replace "/mnt/extra/Music/" "" $selected)
+    set remote "foobar2000 Music Folder/$relative"
+
+    # Find cover art that needs renaming
+    set cover_src ""
+    set cover_dest ""
     for f in "$selected"/{cover,Cover,folder,Folder,album,Album,front,Front,albumart,AlbumArt}.{jpg,jpeg,png,webp}
         if test -f "$f"
             set ext (string lower (string match -r '\.[^.]+$' "$f"))
-            set target "$selected/cover$ext"
-            if test "$f" != "$target"
-                mv "$f" "$target"
-                echo "Renamed "(basename "$f")" → cover$ext"
-            end
+            set cover_src "$f"
+            set cover_dest "cover$ext"
             break
         end
     end
 
-    set relative (string replace "/mnt/extra/Music/" "" $selected)
-    lftp -u bruno,arstneio -e "mirror -R --only-newer --exclude-glob '*.flac' \"$selected\" \"foobar2000 Music Folder/$relative\"; bye" ftp://192.168.1.134
+    # Mirror everything, excluding original cover if it needs renaming
+    set mirror_cmd "mirror -R --only-newer --exclude-glob '*.flac' --exclude-glob '*.ape'"
+    if test -n "$cover_src" -a (basename "$cover_src") != "$cover_dest"
+        set cover_orig (basename "$cover_src")
+        set mirror_cmd "$mirror_cmd --exclude-glob '$cover_orig'"
+    end
+    set mirror_cmd "$mirror_cmd \"$selected\" \"$remote\""
+
+    # Upload cover with normalised name if needed
+    set put_cmd ""
+    if test -n "$cover_src"
+        set put_cmd "; put \"$cover_src\" -o \"$remote/$cover_dest\""
+    end
+
+    lftp -u bruno,arstneio -e "$mirror_cmd$put_cmd; bye" ftp://192.168.1.134
 end
