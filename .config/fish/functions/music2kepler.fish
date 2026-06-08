@@ -7,7 +7,7 @@ function music2kepler
     # Normalise cover art filename to cover.ext
     for f in "$selected"/{cover,Cover,folder,Folder,album,Album,front,Front,albumart,AlbumArt}.{jpg,jpeg,png,webp}
         if test -f "$f"
-            set ext (string match -r '\.[^.]+$' "$f")
+            set ext (string lower (string match -r '\.[^.]+$' "$f"))
             set target "$selected/cover$ext"
             if test "$f" != "$target"
                 mv "$f" "$target"
