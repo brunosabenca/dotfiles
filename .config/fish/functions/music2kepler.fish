@@ -1,10 +1,10 @@
 function music2kepler
-    set selected (find /mnt/extra/Music -mindepth 1 -type d | fzf --prompt "Sync to kepler: ")
+    set selected (find /mnt/extra/Music -mindepth 1 -type f \( -name "*.opus" -o -name "*.mp3" -o -name "*.flac" -o -name "*.ape" -o -name "*.wv" \) -printf '%h\n' | sort -u | fzf --prompt "Sync to kepler: ")
     if test -z "$selected"
         return
     end
 
-    set relative (string replace "/mnt/extra/Music/" "" $selected | string replace -a ':' '-')
+    set relative (string replace "/mnt/extra/Music/" "" $selected | string replace -a ': ' ' - ' | string replace -a ':' ' - ')
     set remote "foobar2000 Music Folder/$relative"
 
     # Find cover art
