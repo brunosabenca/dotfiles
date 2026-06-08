@@ -26,6 +26,9 @@ function music2kepler
         set put_cmd "; put \"$cover_src\" -o \"$remote/$cover_dest\""
     end
 
-    set cover_re '(?i)^(cover|folder|album|front|albumart)\.(jpg|jpeg|png|webp)$'
-    lftp -u bruno,arstneio -e "mirror -R --only-newer --exclude-glob '*.flac' --exclude-glob '*.ape' --exclude '$cover_re' \"$selected\" \"$remote\"$put_cmd; bye" ftp://192.168.1.134
+    set cover_exclude ""
+    if test -n "$cover_src"
+        set cover_exclude "--exclude-glob '"(basename "$cover_src")"'"
+    end
+    lftp -u bruno,arstneio -e "mirror -R --only-newer --exclude-glob '*.flac' --exclude-glob '*.ape' $cover_exclude \"$selected\" \"$remote\"$put_cmd; bye" ftp://192.168.1.134
 end
