@@ -4,6 +4,25 @@ function music2kepler
         return
     end
 
+    # Convert lossless sources to Opus 128k if needed
+    set cue (find "$selected" -maxdepth 1 -name "*.cue" | head -1)
+    if test -n "$cue"
+        echo "Splitting CUE+lossless → Opus..."
+        python3 ~/.local/bin/splitcue.py "$cue" "$selected"
+    else
+        set lossless (find "$selected" -maxdepth 1 \( -name "*.flac" -o -name "*.ape" -o -name "*.wv" \))
+        if test -n "$lossless"
+            echo "Converting lossless → Opus..."
+            for f in $lossless
+                set out (string replace -r '\.(flac|ape|wv)$' '.opus' $f)
+                if not test -f $out
+                    ffmpeg -i $f -c:a libopus -b:a 128k -map_metadata 0 -vn $out 2>/dev/null
+                    and echo "  "(basename $out)
+                end
+            end
+        end
+    end
+
     set relative (string replace "/mnt/extra/Music/" "" $selected | string replace -a ': ' ' - ' | string replace -a ':' ' - ')
     set remote "foobar2000 Music Folder/$relative"
 
@@ -19,7 +38,7 @@ function music2kepler
         end
     end
 
-    # Mirror everything except cover art and lossless sources
+    # Mirror everything except lossless sources and cover art,
     # then upload cover separately with normalised name
     set put_cmd ""
     if test -n "$cover_src"
@@ -30,5 +49,7 @@ function music2kepler
     if test -n "$cover_src"
         set cover_exclude "--exclude-glob '"(basename "$cover_src")"'"
     end
-    lftp -u bruno,arstneio -e "mirror -R --only-newer --exclude-glob '*.flac' --exclude-glob '*.ape' $cover_exclude \"$selected\" \"$remote\"$put_cmd; bye" ftp://192.168.1.134
+
+    echo "Syncing to kepler..."
+    lftp -u bruno,arstneio -e "mirror -R --only-newer --exclude-glob '*.flac' --exclude-glob '*.ape' --exclude-glob '*.wv' $cover_exclude \"$selected\" \"$remote\"$put_cmd; bye" ftp://192.168.1.134
 end
