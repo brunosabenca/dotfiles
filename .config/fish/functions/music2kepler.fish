@@ -4,7 +4,7 @@ function music2kepler
         return
     end
 
-    set relative (string replace "/mnt/extra/Music/" "" $selected)
+    set relative (string replace "/mnt/extra/Music/" "" $selected | string replace -a ':' '-')
     set remote "foobar2000 Music Folder/$relative"
 
     # Find cover art
